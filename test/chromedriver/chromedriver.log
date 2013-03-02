@@ -1,0 +1,159 @@
+[0.000][INFO]:      ChromeDriver 26.0.1383.0 /prosjekter/console/test/chromedriver/./chromedriver
+[4.000][FINE]:      Initializing session with capabilities {
+   "browserName": "chrome"
+}
+
+[4.001][INFO]:      Launching chrome: /Applications/Google Chrome.app/Contents/MacOS/Google Chrome --disable-hang-monitor --disable-prompt-on-repost --dom-automation --full-memory-crash-report --no-default-browser-check --no-first-run --disable-background-networking --disable-sync --disable-translate --disable-web-resources --safebrowsing-disable-auto-update --safebrowsing-disable-download-protection --disable-client-side-phishing-detection --disable-component-update --disable-default-apps --enable-logging --log-level=1 --use-mock-keychain --ignore-certificate-errors about:blank
+[4.531][INFO]:      Connected to Chrome successfully. Version: 25.0.1364.99
+[4.536][FINE]:      Command received (/session/dcbeb04779ba75e844908a95ce87a8a4)
+[4.536][FINE]:      Command finished (/session/dcbeb04779ba75e844908a95ce87a8a4) with response {
+   "sessionId": "dcbeb04779ba75e844908a95ce87a8a4",
+   "status": 0,
+   "value": {
+      "acceptSslCerts": false,
+      "applicationCacheEnabled": false,
+      "browserConnectionEnabled": false,
+      "browserName": "chrome",
+      "chrome.chromedriverVersion": "26.0.1383.0",
+      "cssSelectorsEnabled": true,
+      "databaseEnabled": false,
+      "handlesAlerts": true,
+      "javascriptEnabled": true,
+      "locationContextEnabled": false,
+      "nativeEvents": true,
+      "platform": "mac",
+      "rotatable": false,
+      "takesScreenshot": true,
+      "version": "25.0.1364.99",
+      "webStorageEnabled": true
+   }
+}
+
+[4.545][FINE]:      Command received (/session/dcbeb04779ba75e844908a95ce87a8a4/url) with params {
+   "url": "http://giverlandet.sandcastle.local"
+}
+
+[4.545][FINER]:     Waiting for all views to stop loading...
+[4.573][FINER]:     Done waiting for all views to stop loading
+[4.730][FINER]:     Waiting for all views to stop loading...
+[4.731][FINER]:     Done waiting for all views to stop loading
+[4.731][FINE]:      Command finished (/session/dcbeb04779ba75e844908a95ce87a8a4/url) with response {
+   "sessionId": "dcbeb04779ba75e844908a95ce87a8a4",
+   "status": 0,
+   "value": {
+
+   }
+}
+
+[4.744][FINE]:      Command received (/session/dcbeb04779ba75e844908a95ce87a8a4/element) with params {
+   "using": "xpath",
+   "value": "//ol/li[ 3 ]/div/h2/a"
+}
+
+[4.744][FINER]:     Waiting for all views to stop loading...
+[4.778][FINER]:     Done waiting for all views to stop loading
+[4.894][FINER]:     Waiting for all views to stop loading...
+[5.087][FINER]:     Done waiting for all views to stop loading
+[5.087][FINE]:      Command finished (/session/dcbeb04779ba75e844908a95ce87a8a4/element) with response {
+   "sessionId": "dcbeb04779ba75e844908a95ce87a8a4",
+   "status": 0,
+   "value": {
+      "ELEMENT": ":wdc:1361826378887"
+   }
+}
+
+[5.097][FINE]:      Command received (/session/dcbeb04779ba75e844908a95ce87a8a4/element/:wdc:1361826378887/click) with params {
+
+}
+
+[5.097][FINER]:     Waiting for all views to stop loading...
+[5.098][FINER]:     Done waiting for all views to stop loading
+[5.252][FINER]:     Waiting for all views to stop loading...
+[6.603][FINER]:     Done waiting for all views to stop loading
+[6.603][FINE]:      Command finished (/session/dcbeb04779ba75e844908a95ce87a8a4/element/:wdc:1361826378887/click) with response {
+   "sessionId": "dcbeb04779ba75e844908a95ce87a8a4",
+   "status": 0,
+   "value": {
+
+   }
+}
+
+[6.606][FINE]:      Command received (/session/dcbeb04779ba75e844908a95ce87a8a4/element) with params {
+   "using": "xpath",
+   "value": "//ol/li[ 4 ]/div/h2/a"
+}
+
+[6.606][FINER]:     Waiting for all views to stop loading...
+[6.607][FINER]:     Done waiting for all views to stop loading
+[6.635][FINER]:     Waiting for all views to stop loading...
+[6.635][FINER]:     Done waiting for all views to stop loading
+[6.635][FINE]:      Command finished (/session/dcbeb04779ba75e844908a95ce87a8a4/element) with response {
+   "sessionId": "dcbeb04779ba75e844908a95ce87a8a4",
+   "status": 0,
+   "value": {
+      "ELEMENT": ":wdc:1361826378888"
+   }
+}
+
+[6.648][FINE]:      Command received (/session/dcbeb04779ba75e844908a95ce87a8a4/element/:wdc:1361826378888/click) with params {
+
+}
+
+[6.648][FINER]:     Waiting for all views to stop loading...
+[6.648][FINER]:     Done waiting for all views to stop loading
+[6.838][FINER]:     Waiting for all views to stop loading...
+[9.365][FINER]:     Done waiting for all views to stop loading
+[9.365][FINE]:      Command finished (/session/dcbeb04779ba75e844908a95ce87a8a4/element/:wdc:1361826378888/click) with response {
+   "sessionId": "dcbeb04779ba75e844908a95ce87a8a4",
+   "status": 0,
+   "value": {
+
+   }
+}
+
+[9.373][FINE]:      Command received (/session/dcbeb04779ba75e844908a95ce87a8a4/element) with params {
+   "using": "xpath",
+   "value": "//ol/li[ 5 ]/div/h2/a"
+}
+
+[9.373][FINER]:     Waiting for all views to stop loading...
+[9.373][FINER]:     Done waiting for all views to stop loading
+[9.401][FINER]:     Waiting for all views to stop loading...
+[9.402][FINER]:     Done waiting for all views to stop loading
+[9.402][FINE]:      Command finished (/session/dcbeb04779ba75e844908a95ce87a8a4/element) with response {
+   "sessionId": "dcbeb04779ba75e844908a95ce87a8a4",
+   "status": 0,
+   "value": {
+      "ELEMENT": ":wdc:1361826378889"
+   }
+}
+
+[9.414][FINE]:      Command received (/session/dcbeb04779ba75e844908a95ce87a8a4/element/:wdc:1361826378889/click) with params {
+
+}
+
+[9.414][FINER]:     Waiting for all views to stop loading...
+[9.414][FINER]:     Done waiting for all views to stop loading
+[9.579][FINER]:     Waiting for all views to stop loading...
+[9.616][FINER]:     Done waiting for all views to stop loading
+[9.616][FINE]:      Command finished (/session/dcbeb04779ba75e844908a95ce87a8a4/element/:wdc:1361826378889/click) with response {
+   "sessionId": "dcbeb04779ba75e844908a95ce87a8a4",
+   "status": 0,
+   "value": {
+
+   }
+}
+
+[9.648][FINE]:      Command received (/session/dcbeb04779ba75e844908a95ce87a8a4/title)
+[9.648][FINER]:     Waiting for all views to stop loading...
+[9.650][FINER]:     Done waiting for all views to stop loading
+[9.733][FINER]:     Waiting for all views to stop loading...
+[9.734][FINER]:     Done waiting for all views to stop loading
+[9.734][FINE]:      Command finished (/session/dcbeb04779ba75e844908a95ce87a8a4/title) with response {
+   "sessionId": "dcbeb04779ba75e844908a95ce87a8a4",
+   "status": 0,
+   "value": "giverlandet - sandcastle"
+}
+
+[9.770][FINE]:      Command received (/session/dcbeb04779ba75e844908a95ce87a8a4)
+[10.108][INFO]:     Chrome shutdown

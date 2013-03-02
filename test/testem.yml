@@ -1,0 +1,11 @@
+﻿framework: mocha
+test_page: test.terminal.mocha.html
+launchers:
+ Mocha:
+  command: mocha test/*mocha.js -R tap
+  protocol: tap
+launch_in_dev:
+- Safari
+- Chrome
+- Firefox
+- Opera

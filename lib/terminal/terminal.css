@@ -1,0 +1,78 @@
+.__terminal__root__ {
+	position: relative;
+	font-size: 14px;
+	height: 100%;
+}
+.__terminal__root__,
+.__terminal__root__ textarea {
+	cursor: pointer;
+}
+.__terminal__root__ .region .lines {
+	list-style-type: none;
+	padding: 0;
+	margin: 0;
+	position: relative;
+	display: block;
+	width: 100%;
+}
+.__terminal__root__ .region .line {
+	display: block;
+}
+.__terminal__root__ .cursor {
+	display: inline-block;
+	position: relative;
+	top: 1px;
+	width: 5px;
+	height: 10px;
+	border-style: solid;
+	border-width: 1px;
+}
+.__terminal__root__ .content {
+	display: inline;
+	word-wrap: break-word;
+}
+.__terminal__root__ .prompt {
+	padding-right: 7px;
+}
+.__terminal__root__ .cursor.blink {
+	visibility: hidden;
+}
+.__terminal__root__ .alpha0 {
+	zoom: 1;
+	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+	filter: alpha(opacity=0);
+	-moz-opacity: 0.0;
+	-khtml-opacity: 0.0;
+	opacity: 0.0;
+}
+.__terminal__root__ .regions {
+	list-style-type: none;
+}
+.__terminal__root__ .region {
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: -9999;
+	overflow: hidden;
+}
+.__terminal__root__ .region.current {
+	display: block;
+	z-index: auto;
+}
+.__terminal__root__,
+.__terminal__root__ .regions,
+.__terminal__root__ .regions .region,
+.__terminal__root__ textarea.overlay {
+	padding: 0;
+	margin: 0;
+	width: 100%;
+	height: 100%;
+}
+.__terminal__root__ textarea.overlay {
+	position: absolute;
+	top: -20%;
+	left: 0;
+	border-style: none;
+	-webkit-user-modify: read-write-plaintext-only;
+   	-webkit-tap-highlight-color: rgba( 0,0,0,0 );
+}

@@ -1,0 +1,30 @@
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Mocha Tests</title>
+  <link rel="stylesheet" href="node_modules/mocha/mocha.css" />
+  <link rel="stylesheet" href="lib/terminal/terminal.css" />
+  <style>
+    #terminal_test1,
+    #terminal_test2 {
+      height: 100px;
+      width: 400px;
+    }
+  </style>
+</head>
+<body>
+  <div id="mocha"></div>
+  <div class="outer_container" id="terminal_test1"></div>
+  <div class="outer_container" id="terminal_test2"></div>
+  <script type="text/javascript" src="lib/jquery/jquery-1.9.1.js"></script>
+  <script type="text/javascript" src="lib/terminal/terminal.js"></script>
+  <script type="text/javascript" src="node_modules/chai/chai.js"></script>
+  <script type="text/javascript" src="node_modules/mocha/mocha.js"></script>
+  <script type="text/javascript" src="/testem.js"></script>
+  <script>mocha.setup('bdd')</script>
+  <script type="text/javascript" src="test.terminal.mocha.js"></script>  
+  <script>
+    mocha.run();
+  </script>
+</body>
+</html>

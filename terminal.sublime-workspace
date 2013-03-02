@@ -1,0 +1,879 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"curs",
+				"cursorBlinkRate"
+			],
+			[
+				"cur",
+				"cursorBlinkRate"
+			],
+			[
+				"inde",
+				"regionIndex"
+			],
+			[
+				"terminal",
+				"terminal_test2"
+			],
+			[
+				"list",
+				"list-style-type"
+			],
+			[
+				"cu",
+				"cursorBlinkRate"
+			],
+			[
+				"pix_",
+				"pix_itemwidth"
+			],
+			[
+				"mar",
+				"marginBottom"
+			],
+			[
+				"populate_cre",
+				"populate_create_by_type"
+			],
+			[
+				"pix",
+				"pix_itemwidth"
+			],
+			[
+				"pix_item",
+				"pix_itemwidth"
+			],
+			[
+				"hei",
+				"heightTitlebar"
+			],
+			[
+				"inline",
+				"inline-block"
+			],
+			[
+				"on",
+				"onClickItem"
+			],
+			[
+				"item_",
+				"items_count"
+			],
+			[
+				"get",
+				"getTime"
+			],
+			[
+				"pix_sp",
+				"pix_spacing"
+			],
+			[
+				"clip",
+				"clippingMaskWidth"
+			],
+			[
+				"clippin",
+				"clippingMaskHeight"
+			],
+			[
+				"current",
+				"currentTabIndex"
+			],
+			[
+				"has",
+				"has_subitems"
+			],
+			[
+				"no",
+				"nowrap"
+			],
+			[
+				"dummy",
+				"dummy_items_6_items"
+			],
+			[
+				"remoe",
+				"removeWrapper"
+			],
+			[
+				"insert",
+				"insertWrapper"
+			],
+			[
+				"inser",
+				"insertWrapper"
+			],
+			[
+				"remove",
+				"removeWrapper"
+			],
+			[
+				"inlin",
+				"inline-block"
+			],
+			[
+				"leng",
+				"lengthOf"
+			],
+			[
+				"unett",
+				"unett_topmenu"
+			],
+			[
+				"repea",
+				"repeat-x"
+			],
+			[
+				"background",
+				"background-size"
+			],
+			[
+				"stre",
+				"streetnum"
+			],
+			[
+				"http_buil",
+				"http_build_query"
+			],
+			[
+				"bak",
+				"background-color"
+			],
+			[
+				"tm",
+				"tmbTrackWidth"
+			],
+			[
+				"viewpo",
+				"viewportHeight"
+			],
+			[
+				"containmen",
+				"containmentWrapper_"
+			],
+			[
+				"ma",
+				"maxSliderPos"
+			],
+			[
+				"tmb",
+				"tmbTrackHeight"
+			],
+			[
+				"viewport",
+				"viewportHeight"
+			],
+			[
+				"text",
+				"text-align"
+			],
+			[
+				"back",
+				"background-position"
+			],
+			[
+				"http_bui",
+				"http_build_query"
+			],
+			[
+				"tex",
+				"text-indent"
+			],
+			[
+				"ba",
+				"background-repeat"
+			],
+			[
+				"pane",
+				"panel_closebtn"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "lib/terminal/terminal.css",
+			"settings":
+			{
+				"buffer_size": 1509,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "lib/terminal/terminal.cmd.core.js",
+			"settings":
+			{
+				"buffer_size": 2671,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "lib/terminal/terminal.cmd.about.js",
+			"settings":
+			{
+				"buffer_size": 1317,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "www/index.html",
+			"settings":
+			{
+				"buffer_size": 2249,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "lib/jquery/jquery-1.9.1.js",
+			"settings":
+			{
+				"buffer_size": 268381,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "lib/terminal/terminal.js",
+			"settings":
+			{
+				"buffer_size": 10585,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "test/test.terminal.mocha.js",
+			"settings":
+			{
+				"buffer_size": 15930,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "test/test.terminal.mocha.html",
+			"settings":
+			{
+				"buffer_size": 989,
+				"line_ending": "Unix"
+			}
+		}
+	],
+	"build_system": "",
+	"command_palette":
+	{
+		"height": 267.0,
+		"selected_items":
+		[
+			[
+				"Package Control: ",
+				"Package Control: Install Package"
+			]
+		],
+		"width": 449.0
+	},
+	"console":
+	{
+		"height": 195.0
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/Users/n21131/Library/Caches/Cleanup At Startup/Transmit/EC18007C-4D7B-40DA-B0AF-5F3352ACB76D/index.html",
+		"/prosjekter/terminal/www/index.html",
+		"/Users/n21131/Library/Caches/Cleanup At Startup/Transmit/36D9EEA5-C306-4521-979A-651BC170BCE6/index.html",
+		"/prosjekter/giverlandet/sandcastle/lib/sandcastle/sandcastle.js",
+		"/prosjekter/terminal/test/test.terminal.mocha.html",
+		"/prosjekter/giverlandet/sandcastle/test/sandcastle.test.html",
+		"/prosjekter/terminal/test/test.terminal.mocha.js",
+		"/prosjekter/giverlandet/sandcastle/test/sandcastle.test.js",
+		"/Users/n21131/Library/Caches/Cleanup At Startup/Transmit/B3764A0B-4579-470A-96CF-079710C7A9F8/sandcastle.js",
+		"/prosjekter/terminal/test/node_modules/testem/node_modules/underscore/index.html",
+		"/prosjekter/terminal/test/node_modules/testem/node_modules/socket.io/node_modules/policyfile/doc/index.html",
+		"/prosjekter/terminal/lib/terminal/terminal.js",
+		"/prosjekter/terminal/test/testem.yml",
+		"/prosjekter/terminal/test/test.console.mocha.js",
+		"/prosjekter/terminal/test/test.console.mocha.html",
+		"/prosjekter/giverlandet/sandcastle/lib/serum/sandbox.js",
+		"/prosjekter/giverlandet/uncensor/index.html",
+		"/prosjekter/giverlandet/sandcastle/www/giverlandet.css",
+		"/prosjekter/giverlandet/sandcastle/lib/sandcastle/sandcastle.css",
+		"/prosjekter/unett_toppmeny/test/test.unett.js",
+		"/Users/n21131/Dropbox/apikey.txt",
+		"/Users/n21131/Library/Application Support/Sublime Text 2/Packages/User/SublimeREPL.sublime-settings",
+		"/Users/n21131/Library/Application Support/Sublime Text 2/Packages/SublimeREPL/SublimeREPL.sublime-settings",
+		"/Users/n21131/Library/Application Support/Sublime Text 2/Packages/User/Package Control.sublime-settings",
+		"/prosjekter/unett_toppmeny/test/lib/testem/testem.js",
+		"/prosjekter/unett_toppmeny/unett_topmenu.js",
+		"/prosjekter/unett_toppmeny/test/test.js",
+		"/prosjekter/unett_toppmeny/test/test.html",
+		"/prosjekter/unett_toppmeny/test/config.js",
+		"/prosjekter/spionbyen/lib/spionbyen/tpl/main.tpl",
+		"/prosjekter/spionbyen/conf/spionbyen/db/data.sql",
+		"/prosjekter/spionbyen/www/spionbyen/pub/js/main.js",
+		"/prosjekter/spionbyen/lib/spionbyen/app_geo_panel.inc.php",
+		"/prosjekter/spionbyen/lib/spionbyen/tpl/image_rotator.tpl",
+		"/prosjekter/spionbyen/lib/spionbyen/tpl/geo_panel_item.tpl",
+		"/prosjekter/spionbyen/lib/spionbyen/tpl/javascript.tpl",
+		"/prosjekter/spionbyen/www/spionbyen/pub/js/jquery-scroll-0.1.2.js",
+		"/prosjekter/spionbyen/lib/spionbyen/app_venue.inc.php",
+		"/prosjekter/spionbyen/i18n/spionbyen/nb_NO.UTF-8/LC_MESSAGES/spionbyen.po",
+		"/prosjekter/spionbyen/lib/spionbyen/text.inc.php",
+		"/prosjekter/spionbyen/lib/spionbyen/tpl/sub_categories.tpl",
+		"/prosjekter/spionbyen/www/spionbyen/pub/css/spionbyen.css",
+		"/prosjekter/spionbyen/lib/spionbyen/tpl/javascript_venue.tpl",
+		"/prosjekter/spionbyen/lib/spionbyen/app_memcache.inc.php",
+		"/prosjekter/spionbyen/lib/spionbyen/app_cache.inc.php",
+		"/Users/n21131/Dropbox/url.txt",
+		"/Users/n21131/Dropbox/create_spionbyen.txt",
+		"/prosjekter/spionbyen/lib/spionbyen/tpl/popup.tpl",
+		"/prosjekter/spionbyen/lib/spionbyen/app_base.inc.php",
+		"/prosjekter/spionbyen/lib/spionbyen/tpl/venue_additional_image.tpl",
+		"/prosjekter/spionbyen/lib/spionbyen/tpl/mugshot.tpl",
+		"/prosjekter/spionbyen/lib/spionbyen/app_popup.inc.php",
+		"/prosjekter/spionbyen/www/spionbyen/pub/css/spionbyen_ie.css",
+		"/prosjekter/spionbyen/www/spionbyen/pub/js/imsizes.js",
+		"/prosjekter/spionbyen/lib/spionbyen/tpl/geo_panel.tpl",
+		"/prosjekter/spionbyen/lib/spionbyen/tpl/styles.tpl",
+		"/prosjekter/spionbyen/lib/spionbyen/tpl/google_analytics.tpl",
+		"/prosjekter/spionbyen/lib/spionbyen/factory.inc.php",
+		"/prosjekter/spionbyen/lib/spionbyen/tpl/splash.tpl",
+		"/prosjekter/spionbyen/conf/spionbyen/spionbyen.conf",
+		"/prosjekter/spionbyen/lib/spionbyen/app_frontend.inc.php",
+		"/div/bokdata/brann_cover_eksempel.sql",
+		"/prosjekter/spionbyen/www/spionbyen/phpinfo.php",
+		"/prosjekter/spionbyen/www/spionbyen/image.php",
+		"/prosjekter/spionbyen/lib/spionbyen/tpl/scripts.tpl",
+		"/prosjekter/spionbyen/lib/spionbyen/tpl/content_frontend.tpl",
+		"/prosjekter/spionbyen/lib/spionbyen/app_splash.inc.php",
+		"/prosjekter/spionbyen/lib/spionbyen/tpl/scripts_timeline.tpl",
+		"/Users/n21131/Desktop/skredsøker_epost",
+		"/Users/n21131/.Trash/content_frontend.tpl",
+		"/prosjekter/spionbyen/lib/spionbyen/tpl/canvas_content_venue.tpl",
+		"/prosjekter/spionbyen/lib/spionbyen/tpl/venue_timeline_event.tpl",
+		"/prosjekter/spionbyen/www/spionbyen/pub/js/jquery_scroll-0.1.2.js",
+		"/prosjekter/spionbyen/lib/spionbyen/tpl/venue_story.tpl",
+		"/Users/n21131/Library/Application Support/Sublime Text 2/Packages/Default/Preferences.sublime-settings",
+		"/prosjekter/spionbyen/lib/spionbyen/app_timeline.inc.php",
+		"/prosjekter/spionbyen/www/spionbyen/pub/js/jquery_scroll.js"
+	],
+	"find":
+	{
+		"height": 35.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+			"index.html",
+			"test.terminal.mocha.html",
+			"sandcastle.test.js",
+			"sandcastle.js",
+			"getItemMetrics",
+			"sandcastle.js",
+			"dummy_items_6_items_2.json",
+			"topmenu.js",
+			"test_topmenu.js",
+			"",
+			"update"
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"		$( '#terminal1' )\n			.terminal( { cursorBlinkRate: 500, prompt: 'term 01' } );\n",
+			"options =",
+			"parent",
+			"0f0",
+			"#0f0",
+			"h",
+			"				.terminal( 'new_line' )\n",
+			"about",
+			"overf",
+			"inline-blo",
+			"nowrap",
+			"cursor",
+			"fursor",
+			"consolePaddingBottom",
+			"prompt",
+			"prompt(",
+			"\n	",
+			"  ",
+			"saveOptions",
+			"\n	",
+			"createre",
+			"useRe",
+			"useRegion",
+			"createRegion",
+			"options.blinkerId",
+			"data",
+			"updateCursor",
+			"newLine",
+			"		\n",
+			"newLine",
+			"		\n",
+			"  ",
+			"undefined",
+			"fn",
+			"var fn",
+			"console",
+			"window.jQuery",
+			"console",
+			"src",
+			"dag",
+			"10892725",
+			"castle_wrapper",
+			"click",
+			"tmp",
+			"tmo",
+			"alert",
+			"\n			",
+			".type",
+			"5",
+			"\n		",
+			"pix_video",
+			"populate_create",
+			"\n	",
+			"var",
+			"that",
+			"root",
+			"$( root )",
+			"x1",
+			"h3",
+			"item_metrics",
+			"im\\.",
+			".im",
+			"item_metrics",
+			"getMetrics",
+			" m.",
+			"getItemMetrics",
+			"getMetrics",
+			"insertA",
+			"that",
+			"extend",
+			"item_spacing",
+			"height_titlebar",
+			"height_expanded",
+			"height_collapsed",
+			"toggle",
+			"click",
+			"toggleMenuState",
+			"default_item",
+			"createUni",
+			"resize",
+			"count++",
+			"options",
+			"img",
+			"setExpand",
+			"setExpandState",
+			"expand",
+			"height",
+			"#",
+			"img",
+			".attr(",
+			".attr( 'width'",
+			":\"0\"",
+			"\"height\":\"\"",
+			"\"width\":\"\"",
+			"makeSubitemContent",
+			"-1",
+			"onClickTab",
+			"trigger",
+			"resize",
+			"removeWrapper( ",
+			"removeWrapper\\( id_topmenu_([0-9]+) \\)",
+			"removeWrapper( id_topmenu_([0-9]+) )",
+			"res",
+			"onRes",
+			"background",
+			"expand",
+			"count",
+			"2px",
+			"fff",
+			"wrong hei",
+			"json",
+			"not",
+			"}",
+			"'",
+			"assert",
+			"<",
+			"		\n",
+			".sel ul",
+			".cat .sel ul",
+			"disubmnu",
+			"textbody h3",
+			"view",
+			"h1 span",
+			"legend",
+			"panel",
+			"listwrapper",
+			"updateView",
+			"listwra"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": true,
+		"replace_history":
+		[
+			"terminal",
+			"tmp0",
+			"populateCreate",
+			"im",
+			" im.",
+			"getMetrics",
+			"getItemMetrics",
+			"itemSpacing",
+			"heightTitlebar",
+			"heightExpanded",
+			"heightCollapsed",
+			":\"10\"",
+			"\"height\":\"0\"",
+			"\"width\":\"0\"",
+			"%}\n",
+			"update",
+			""
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 3,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "lib/terminal/terminal.css",
+					"settings":
+					{
+						"buffer_size": 1509,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								78,
+								78
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/CSS/CSS.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "lib/terminal/terminal.cmd.core.js",
+					"settings":
+					{
+						"buffer_size": 2671,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1835,
+								1835
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 1251.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "lib/terminal/terminal.cmd.about.js",
+					"settings":
+					{
+						"buffer_size": 1317,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1214,
+								1214
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 337.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "www/index.html",
+					"settings":
+					{
+						"buffer_size": 2249,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1615,
+								1615
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"translate_tabs_to_spaces": false,
+							"word_wrap": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 757.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				}
+			]
+		},
+		{
+			"selected": 0,
+			"sheets":
+			[
+				{
+					"buffer": 4,
+					"file": "lib/jquery/jquery-1.9.1.js",
+					"settings":
+					{
+						"buffer_size": 268381,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								266100,
+								266100
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 143496.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				}
+			]
+		},
+		{
+			"selected": 0,
+			"sheets":
+			[
+				{
+					"buffer": 5,
+					"file": "lib/terminal/terminal.js",
+					"settings":
+					{
+						"buffer_size": 10585,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								10396,
+								10396
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 5063.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				}
+			]
+		},
+		{
+			"selected": 0,
+			"sheets":
+			[
+				{
+					"buffer": 6,
+					"file": "test/test.terminal.mocha.js",
+					"settings":
+					{
+						"buffer_size": 15930,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2812,
+								2812
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Mocha/Mocha.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 290.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 7,
+					"file": "test/test.terminal.mocha.html",
+					"settings":
+					{
+						"buffer_size": 989,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								296,
+								296
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Mocha/Mocha.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 0.0
+	},
+	"input":
+	{
+		"height": 31.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			],
+			[
+				1,
+				0,
+				2,
+				1
+			],
+			[
+				0,
+				1,
+				1,
+				2
+			],
+			[
+				1,
+				1,
+				2,
+				2
+			]
+		],
+		"cols":
+		[
+			0.0,
+			0.487474451283,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			0.452889830916,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"replace":
+	{
+		"height": 124.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"show_minimap": true,
+	"show_open_files": true,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 264.0,
+	"status_bar_visible": true
+}
