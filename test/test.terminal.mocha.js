@@ -6,6 +6,7 @@ var assert = chai.assert,
     id1,
     id2,
     ln,
+    s,
     t,
     e,
     f,
@@ -211,6 +212,30 @@ describe( "terminal", function() {
         assert.lengthOf( $( '#terminal_test1 textarea' ).trigger( $.Event( 'keypress', { which: 'y'.charCodeAt(  0 ), keyCode: 'y'.charCodeAt(  0 ) } ) ), 1, "unable to trig 'keypress' 'y'" );
         assert.equal( $( '#terminal_test1 #' + region.id + ' .line:last .content' ).text(), 'x', "current line should still be 'x' after keystrokes" );
     
+    } );
+
+    it( "should have a typewriter function", function( done ) {
+
+        assert.isString( s = '', "strange error declaring empty string" );
+        assert.isString( t = 'terminal keyboard simulation', "error initializing typewriter text" );
+        assert.isObject( $( '#terminal_test1' ).terminal( 'type_line', t ), 1, "typewriter function failed" );
+        assert.isObject( region = $( '#terminal_test1' ).terminal( 'get_current_region' ), "error retrieving current region" );
+        assert.isNumber( j = 0, "error initializing j as integer" );
+        assert.isObject( $( '#terminal_test1' ).terminal( 'new_line' ), 1, "error entering newline" );
+        assert.isNumber( i = setInterval(function(){j++;s=$('#'+region.id+' .line:last .content').text();if(t.length==s.length){clearInterval(i);assert.isTrue(j>1,"string was written all at once, or too fast");done();}},100), "error creating timer for testing typewriter function" );
+    
+    } );
+
+    it( "should not let keyboard input interfere while typewriting", function( done ) {
+
+        assert.isString( t = 'terminal keyboard simulation', "error initializing typewriter text" );
+        assert.isObject( $( '#terminal_test1' ).terminal( 'new_line' ), 1, "error adding newline" );
+        assert.equal( $( '#terminal_test1 #' + region.id + ' .line:last .content' ).text(), '', "new line was not empty" );
+        assert.isObject( $( '#terminal_test1' ).terminal( 'type_line', t ), 1, "typewriter function failed" );
+        assert.isNumber( i = setTimeout( function(){ s = $( '#terminal_test1 #' + region.id + ' .line:last .content' ).text(); assert.equal( t, s, 'wrong length of resulting string' ); clearInterval( i ); done(); }, 1500 ), "error creating timer" );
+        assert.lengthOf( $( '#terminal_test1 textarea' ).trigger( $.Event( 'keypress', { which: 'y'.charCodeAt(  0 ), keyCode: 'y'.charCodeAt(  0 ) } ) ), 1, "unable to trig 'keypress' 'y'" );
+        assert.lengthOf( $( '#terminal_test1 textarea' ).trigger( $.Event( 'keydown', { which: 13, keyCode: 13 } ) ), 1, "unable to trig 'keydown' ENTER" );
+
     } );
 
 } );
