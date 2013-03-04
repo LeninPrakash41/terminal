@@ -4,6 +4,10 @@
 		"selected_items":
 		[
 			[
+				"get_",
+				"get_current_region"
+			],
+			[
 				"curs",
 				"cursorBlinkRate"
 			],
@@ -199,7 +203,7 @@
 			"file": "lib/terminal/terminal.css",
 			"settings":
 			{
-				"buffer_size": 1509,
+				"buffer_size": 1510,
 				"line_ending": "Unix"
 			}
 		},
@@ -207,7 +211,7 @@
 			"file": "lib/terminal/terminal.cmd.core.js",
 			"settings":
 			{
-				"buffer_size": 2671,
+				"buffer_size": 2750,
 				"line_ending": "Unix"
 			}
 		},
@@ -215,7 +219,7 @@
 			"file": "lib/terminal/terminal.cmd.about.js",
 			"settings":
 			{
-				"buffer_size": 1317,
+				"buffer_size": 1555,
 				"line_ending": "Unix"
 			}
 		},
@@ -223,7 +227,15 @@
 			"file": "www/index.html",
 			"settings":
 			{
-				"buffer_size": 2249,
+				"buffer_size": 1305,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "www/4panes.html",
+			"settings":
+			{
+				"buffer_size": 1391,
 				"line_ending": "Unix"
 			}
 		},
@@ -239,7 +251,7 @@
 			"file": "lib/terminal/terminal.js",
 			"settings":
 			{
-				"buffer_size": 10585,
+				"buffer_size": 11236,
 				"line_ending": "Unix"
 			}
 		},
@@ -247,7 +259,7 @@
 			"file": "test/test.terminal.mocha.js",
 			"settings":
 			{
-				"buffer_size": 15930,
+				"buffer_size": 18972,
 				"line_ending": "Unix"
 			}
 		},
@@ -375,6 +387,7 @@
 		"height": 0.0,
 		"where_history":
 		[
+			"terminal.core.js",
 			"index.html",
 			"test.terminal.mocha.html",
 			"sandcastle.test.js",
@@ -393,6 +406,7 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"( argc, argv",
 			"		$( '#terminal1' )\n			.terminal( { cursorBlinkRate: 500, prompt: 'term 01' } );\n",
 			"options =",
 			"parent",
@@ -519,8 +533,7 @@
 			"legend",
 			"panel",
 			"listwrapper",
-			"updateView",
-			"listwra"
+			"updateView"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -528,6 +541,7 @@
 		"regex": true,
 		"replace_history":
 		[
+			"( argc, argv, e",
 			"terminal",
 			"tmp0",
 			"populateCreate",
@@ -563,15 +577,15 @@
 					"file": "lib/terminal/terminal.css",
 					"settings":
 					{
-						"buffer_size": 1509,
+						"buffer_size": 1510,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								78,
-								78
+								1376,
+								1376
 							]
 						],
 						"settings":
@@ -580,7 +594,7 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 403.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -590,15 +604,15 @@
 					"file": "lib/terminal/terminal.cmd.core.js",
 					"settings":
 					{
-						"buffer_size": 2671,
+						"buffer_size": 2750,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1835,
-								1835
+								1593,
+								1593
 							]
 						],
 						"settings":
@@ -607,7 +621,7 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 1251.0,
+						"translation.y": 810.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -617,15 +631,15 @@
 					"file": "lib/terminal/terminal.cmd.about.js",
 					"settings":
 					{
-						"buffer_size": 1317,
+						"buffer_size": 1555,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1214,
-								1214
+								1401,
+								1401
 							]
 						],
 						"settings":
@@ -634,7 +648,7 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 337.0,
+						"translation.y": 421.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -644,15 +658,15 @@
 					"file": "www/index.html",
 					"settings":
 					{
-						"buffer_size": 2249,
+						"buffer_size": 1305,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1615,
-								1615
+								1026,
+								1026
 							]
 						],
 						"settings":
@@ -662,7 +676,34 @@
 							"word_wrap": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 757.0,
+						"translation.y": 232.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "www/4panes.html",
+					"settings":
+					{
+						"buffer_size": 1391,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								911,
+								911
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 257.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -674,7 +715,7 @@
 			"sheets":
 			[
 				{
-					"buffer": 4,
+					"buffer": 5,
 					"file": "lib/jquery/jquery-1.9.1.js",
 					"settings":
 					{
@@ -707,19 +748,19 @@
 			"sheets":
 			[
 				{
-					"buffer": 5,
+					"buffer": 6,
 					"file": "lib/terminal/terminal.js",
 					"settings":
 					{
-						"buffer_size": 10585,
+						"buffer_size": 11236,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								10396,
-								10396
+								301,
+								301
 							]
 						],
 						"settings":
@@ -728,7 +769,7 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 5063.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -740,19 +781,19 @@
 			"sheets":
 			[
 				{
-					"buffer": 6,
+					"buffer": 7,
 					"file": "test/test.terminal.mocha.js",
 					"settings":
 					{
-						"buffer_size": 15930,
+						"buffer_size": 18972,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								2812,
-								2812
+								18801,
+								18801
 							]
 						],
 						"settings":
@@ -761,14 +802,14 @@
 							"tab_size": 4,
 							"translate_tabs_to_spaces": true
 						},
-						"translation.x": 0.0,
-						"translation.y": 290.0,
+						"translation.x": 1.0,
+						"translation.y": 2673.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
-					"buffer": 7,
+					"buffer": 8,
 					"file": "test/test.terminal.mocha.html",
 					"settings":
 					{
