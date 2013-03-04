@@ -194,9 +194,23 @@ describe( "terminal", function() {
         assert.lengthOf( $( '#terminal_test1 textarea' ).trigger( $.Event( 'keydown', { which: 13, keyCode: 13 } ) ), 1, "unable to trig 'keydown' ENTER" );
         assert.lengthOf( $( '#terminal_test1' ).terminal( 'input_listen', { readLine: function( line, e ) { assert.isTrue( false, "should never be called" ); } } ), 1, "error registering input functions" );
         assert.lengthOf( $( '#terminal_test1' ).terminal( 'prompt', true ), 1, "error turning on prompt" );
-        assert.lengthOf( $( '#terminal_test1 textarea' ).trigger( $.Event( 'keypress', { which: 'y'.charCodeAt(  0 ), keyCode: 'x'.charCodeAt(  0 ) } ) ), 1, "unable to trig 'keypress' 'y'" );
+        assert.lengthOf( $( '#terminal_test1 textarea' ).trigger( $.Event( 'keypress', { which: 'y'.charCodeAt(  0 ), keyCode: 'x'.charCodeAt(  0 ) } ) ), 1, "unable to trig 'keypress' 'x'" );
         assert.lengthOf( $( '#terminal_test1 textarea' ).trigger( $.Event( 'keydown', { which: 13, keyCode: 13 } ) ), 1, "unable to trig 'keydown' ENTER" );
 
+    } );
+
+    it( "should have passive/active mode", function() {
+
+        assert.isObject( options = $( '#terminal_test1' ).terminal( 'get_options' ), "unable to retrieve options for terminal 1" );
+        assert.isBoolean( options.passiveMode, "no passive mode flag" );
+        assert.isFalse( options.passiveMode, "should initially have been active (passiveMode = false)" );
+        assert.isObject( region = $( '#terminal_test1' ).terminal( 'get_current_region' ), "unable to retrieve current region from terminal 1" );
+        assert.lengthOf( $( '#terminal_test1 textarea' ).trigger( $.Event( 'keypress', { which: 'x'.charCodeAt(  0 ), keyCode: 'x'.charCodeAt(  0 ) } ) ), 1, "unable to trig 'keypress' 'x'" );
+        assert.equal( $( '#terminal_test1 #' + region.id + ' .line:last .content' ).text(), 'x', "current line should be 'x'" );
+        assert.lengthOf( $( '#terminal_test1' ).terminal( 'set_passive', true ), 1, "error entering passive mode" );
+        assert.lengthOf( $( '#terminal_test1 textarea' ).trigger( $.Event( 'keypress', { which: 'y'.charCodeAt(  0 ), keyCode: 'y'.charCodeAt(  0 ) } ) ), 1, "unable to trig 'keypress' 'y'" );
+        assert.equal( $( '#terminal_test1 #' + region.id + ' .line:last .content' ).text(), 'x', "current line should still be 'x' after keystrokes" );
+    
     } );
 
 } );
