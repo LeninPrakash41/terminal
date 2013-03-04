@@ -53,6 +53,19 @@ describe( "terminal", function() {
 
     } );
 
+    it( "should let client change prompt", function() {
+
+        assert.lengthOf( $( '#terminal_test1' ).terminal( 'set_prompt', 'terminal_test1$' ), 1, "unable to change prompt text for terminal 1" );
+        assert.lengthOf( $( '#terminal_test1' ).terminal( 'new_line' ), 1, "error inserting newline on terminal 1" );
+        assert.lengthOf( $( '#terminal_test2' ).terminal( 'set_prompt', 'terminal_test2$' ), 1, "unable to change prompt text for terminal 2" );
+        assert.lengthOf( $( '#terminal_test2' ).terminal( 'new_line' ), 1, "error inserting newline on terminal 2" );
+        assert.isObject( region = $( '#terminal_test1' ).terminal( 'get_current_region' ), "unable to retrieve current region for terminal 1" );
+        assert.equal( $( '#' + region.id + ' .lines .line:last .prompt' ).text(), 'terminal_test1$', "prompt text not correctly set on terminal 1" );
+        assert.isObject( region = $( '#terminal_test2' ).terminal( 'get_current_region' ), "unable to retrieve current region for terminal 2" );
+        assert.equal( $( '#' + region.id + ' .lines .line:last .prompt' ).text(), 'terminal_test2$', "prompt text not correctly set on terminal 2" );
+
+    } );
+
     it( "should be chainable", function() {
 
         assert.lengthOf( $( '.outer_container' ).terminal().filter( '#terminal_test2' ), 1, 'error filtering out test element 2' );
@@ -231,10 +244,8 @@ describe( "terminal", function() {
         assert.isString( t = 'terminal keyboard simulation', "error initializing typewriter text" );
         assert.isObject( $( '#terminal_test1' ).terminal( 'new_line' ), 1, "error adding newline" );
         assert.equal( $( '#terminal_test1 #' + region.id + ' .line:last .content' ).text(), '', "new line was not empty" );
-        assert.isObject( $( '#terminal_test1' ).terminal( 'type_line', t ), 1, "typewriter function failed" );
-        assert.isNumber( i = setTimeout( function(){ s = $( '#terminal_test1 #' + region.id + ' .line:last .content' ).text(); assert.equal( t, s, 'wrong length of resulting string' ); clearInterval( i ); done(); }, 1500 ), "error creating timer" );
-        assert.lengthOf( $( '#terminal_test1 textarea' ).trigger( $.Event( 'keypress', { which: 'y'.charCodeAt(  0 ), keyCode: 'y'.charCodeAt(  0 ) } ) ), 1, "unable to trig 'keypress' 'y'" );
-        assert.lengthOf( $( '#terminal_test1 textarea' ).trigger( $.Event( 'keydown', { which: 13, keyCode: 13 } ) ), 1, "unable to trig 'keydown' ENTER" );
+        assert.isObject( $( '#terminal_test1' ).terminal( 'type_line', { line: t, done: function() { s = $( '#terminal_test1 #' + region.id + ' .line:last .content' ).text(); clearInterval( i ); clearInterval( j ); assert.equal( s, t, 'wrong result string' ); done(); } } ), 1, "typewriter function failed" );
+        assert.isNumber( j = setInterval( function() { $( '#terminal_test1 textarea' ).trigger( $.Event( 'keypress', { which: 'y'.charCodeAt(  0 ), keyCode: 'y'.charCodeAt(  0 ) } ) ); }, 200 ), "unable to trig 'keypress' 'y'" );
 
     } );
 
