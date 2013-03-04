@@ -163,9 +163,9 @@ describe( "terminal", function() {
 
     } );
 
-    it( "should trig a callback for a registered command", function( done ) {
+    it( "should trig a callback for a registered command", function() {
 
-        assert.lengthOf( $( '#terminal_test1' ).terminal( 'register_command', {name:'test',main:function(c,v){assert.equal(v[1],'success');$( '#terminal_test1' ).terminal('new_line');done();}}), 1, "failed in registering test command" );
+        assert.lengthOf( $( '#terminal_test1' ).terminal( 'register_command', {name:'test',main:function(c,v){assert.equal(v[1],'success');$( '#terminal_test1' ).terminal('new_line');}}), 1, "failed in registering test command" );
         assert.isString( t = 'test success', "unable to create command string" );
         assert.lengthOf( $( '#terminal_test1 textarea' ).trigger( $.Event( 'keypress', { which: t.charCodeAt(  0 ), keyCode: t.charCodeAt(  0 ) } ) ), 1, "unable to trig 'keypress' 't'" );
         assert.lengthOf( $( '#terminal_test1 textarea' ).trigger( $.Event( 'keypress', { which: t.charCodeAt(  1 ), keyCode: t.charCodeAt(  1 ) } ) ), 1, "unable to trig 'keypress' 'e'" );
@@ -179,6 +179,22 @@ describe( "terminal", function() {
         assert.lengthOf( $( '#terminal_test1 textarea' ).trigger( $.Event( 'keypress', { which: t.charCodeAt(  9 ), keyCode: t.charCodeAt(  9 ) } ) ), 1, "unable to trig 'keypress' 'e'" );
         assert.lengthOf( $( '#terminal_test1 textarea' ).trigger( $.Event( 'keypress', { which: t.charCodeAt( 10 ), keyCode: t.charCodeAt( 10 ) } ) ), 1, "unable to trig 'keypress' 's'" );
         assert.lengthOf( $( '#terminal_test1 textarea' ).trigger( $.Event( 'keypress', { which: t.charCodeAt( 11 ), keyCode: t.charCodeAt( 11 ) } ) ), 1, "unable to trig 'keypress' 's'" );
+        assert.lengthOf( $( '#terminal_test1 textarea' ).trigger( $.Event( 'keydown', { which: 13, keyCode: 13 } ) ), 1, "unable to trig 'keydown' ENTER" );
+
+    } );
+
+    it( "should trig a callback for reading input", function() {
+
+        assert.isObject( options = $( '#terminal_test1' ).terminal( 'get_options' ), "unable to retrieve options for terminal 1" );
+        assert.isTrue( options.usePrompt, "usePrompt should have been true" );
+        assert.lengthOf( $( '#terminal_test1' ).terminal( 'prompt', false ), 1, "error turning off prompt" );
+        assert.isFalse( options.usePrompt, "usePrompt should have been false (turned off)" );
+        assert.lengthOf( $( '#terminal_test1' ).terminal( 'input_listen', { readLine: function( line, e ) { assert.equal( line, 'y', "wrong content of input line" ); } } ), 1, "error registering input functions" );
+        assert.lengthOf( $( '#terminal_test1 textarea' ).trigger( $.Event( 'keypress', { which: 'y'.charCodeAt(  0 ), keyCode: 'y'.charCodeAt(  0 ) } ) ), 1, "unable to trig 'keypress' 'y'" );
+        assert.lengthOf( $( '#terminal_test1 textarea' ).trigger( $.Event( 'keydown', { which: 13, keyCode: 13 } ) ), 1, "unable to trig 'keydown' ENTER" );
+        assert.lengthOf( $( '#terminal_test1' ).terminal( 'input_listen', { readLine: function( line, e ) { assert.isTrue( false, "should never be called" ); } } ), 1, "error registering input functions" );
+        assert.lengthOf( $( '#terminal_test1' ).terminal( 'prompt', true ), 1, "error turning on prompt" );
+        assert.lengthOf( $( '#terminal_test1 textarea' ).trigger( $.Event( 'keypress', { which: 'y'.charCodeAt(  0 ), keyCode: 'x'.charCodeAt(  0 ) } ) ), 1, "unable to trig 'keypress' 'y'" );
         assert.lengthOf( $( '#terminal_test1 textarea' ).trigger( $.Event( 'keydown', { which: 13, keyCode: 13 } ) ), 1, "unable to trig 'keydown' ENTER" );
 
     } );
