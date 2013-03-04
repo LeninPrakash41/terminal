@@ -132,7 +132,7 @@ describe( "terminal", function() {
         assert.isObject( e = $( '#terminal_test1 .cursor' ) );
         assert.isNumber( j = options.cursorBlinkRate, "error retrieving cursorBlinkRate from options object" );
         assert.isBoolean( f = e.hasClass( 'blink' ), "error returning blink state" );
-        assert.isNumber( i = setInterval( function(){ assert.isFalse( f === e.hasClass( 'blink' ) ); done(); clearInterval( i ); }, j ), "cursor doesn't blink" );
+        assert.isNumber( i = setInterval( function(){ assert.isFalse( f === e.hasClass( 'blink' ) ); clearInterval( i ); done(); }, j ), "cursor doesn't blink" );
 
     } );
 
@@ -143,7 +143,7 @@ describe( "terminal", function() {
         assert.isNumber( j = options.cursorBlinkRate );
         assert.lengthOf( $( '#terminal_test1' ).terminal( 'focusout' ), 1, "failed in calling 'focusout' directly" );
         assert.isFalse( e.hasClass( 'blink' ), "should not blink" );
-        assert.isNumber( i = setInterval( function(){ assert.isFalse( e.hasClass( 'blink' ) ); done(); }, j ), "should not blink" );
+        assert.isNumber( i = setInterval( function(){ assert.isFalse( e.hasClass( 'blink' ) ); clearInterval( i ); done(); }, j ), "should not blink" );
 
     } );
 
