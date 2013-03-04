@@ -6,19 +6,14 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 	<script type="text/javascript" src="lib/jquery/jquery-1.9.1.js"></script>
 	<script type="text/javascript" src="lib/terminal/terminal.js"></script>
+	<script type="text/javascript" src="lib/terminal/terminal.cmd.core.js"></script>
+	<script type="text/javascript" src="lib/terminal/terminal.cmd.about.js"></script>
 	<link rel="stylesheet" type="text/css" href="lib/terminal/terminal.css"/>
 	<title>terminal</title>	
 	<style>
 		body {
 			font-family: "Consolas", "Courier New", monospace;
 			font-size: 14px;
-			background-color: #555;
-		}
-		#terminal1 {
-			color: #F00;
-			background-color: #000;
-		}
-		#terminal2 {
 			color: #0f0;
 			background-color: #000;
 		}
@@ -34,48 +29,11 @@
 		}
 		.root {
 			width: 100%;
-			height: 50%;
+			height: 100%;
 		}
 	</style>
 </head>
 <body>
-	<div class="root" id="terminal1"></div>
-	<div class="root" id="terminal2"></div>
-	<script type="text/javascript">
-
-		$( '#terminal1' )
-			.terminal( { cursorBlinkRate: 500, prompt: 'term 01' } );
-		$( '#terminal2' )
-			.terminal( { cursorBlinkRate: 500, prompt: 'term 02' } );
-		$( '.root' )	
-			.terminal( 'register_command', { name: 'hello', main: function( argc, argv, e ) {
-				e
-					.terminal( 'prompt', false )
-					.terminal( 'new_line' )
-					.terminal( 'write_line', 'you!' )
-					.terminal( 'prompt', true )
-					.terminal( 'new_line' );
-			} } )
-			.filter( '#terminal1' )
-			.terminal( 'register_command', { name: 'yo', main: function( argc, argv, e ) {
-				e
-					.terminal( 'prompt', false )
-					.terminal( 'new_line' )
-					.terminal( 'write_line', 'hey, duude!' )
-					.terminal( 'prompt', true )
-					.terminal( 'new_line' );
-			} } )
-			.end()
-			.filter( '#terminal2' )
-			.terminal( 'register_command', { name: 'yo', main: function( argc, argv, e ) {
-				e
-					.terminal( 'prompt', false )
-					.terminal( 'new_line' )
-					.terminal( 'write_line', 'yo, what\'s up?' )
-					.terminal( 'prompt', true )
-					.terminal( 'new_line' );
-			} } );
-
-	</script>
+	<div class="root" id="terminal"></div>
 </body>
 </html>
