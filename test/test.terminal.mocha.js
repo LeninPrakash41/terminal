@@ -55,9 +55,9 @@ describe( "terminal", function() {
 
     it( "should let client change prompt", function() {
 
-        assert.lengthOf( $( '#terminal_test1' ).terminal( 'set_prompt', 'terminal_test1$' ), 1, "unable to change prompt text for terminal 1" );
+        assert.lengthOf( $( '#terminal_test1' ).terminal( 'prompt_text', 'terminal_test1$' ), 1, "unable to change prompt text for terminal 1" );
         assert.lengthOf( $( '#terminal_test1' ).terminal( 'new_line' ), 1, "error inserting newline on terminal 1" );
-        assert.lengthOf( $( '#terminal_test2' ).terminal( 'set_prompt', 'terminal_test2$' ), 1, "unable to change prompt text for terminal 2" );
+        assert.lengthOf( $( '#terminal_test2' ).terminal( 'prompt_text', 'terminal_test2$' ), 1, "unable to change prompt text for terminal 2" );
         assert.lengthOf( $( '#terminal_test2' ).terminal( 'new_line' ), 1, "error inserting newline on terminal 2" );
         assert.isObject( region = $( '#terminal_test1' ).terminal( 'get_current_region' ), "unable to retrieve current region for terminal 1" );
         assert.equal( $( '#' + region.id + ' .lines .line:last .prompt' ).text(), 'terminal_test1$', "prompt text not correctly set on terminal 1" );
@@ -200,14 +200,14 @@ describe( "terminal", function() {
     it( "should trig a callback for reading input", function() {
 
         assert.isObject( options = $( '#terminal_test1' ).terminal( 'get_options' ), "unable to retrieve options for terminal 1" );
-        assert.isTrue( options.usePrompt, "usePrompt should have been true" );
-        assert.lengthOf( $( '#terminal_test1' ).terminal( 'prompt', false ), 1, "error turning off prompt" );
-        assert.isFalse( options.usePrompt, "usePrompt should have been false (turned off)" );
+        assert.isTrue( options.promptVisibility, "promptVisibility should have been true" );
+        assert.lengthOf( $( '#terminal_test1' ).terminal( 'prompt_visibility', false ), 1, "error turning off prompt" );
+        assert.isFalse( options.promptVisibility, "promptVisibility should have been false (turned off)" );
         assert.lengthOf( $( '#terminal_test1' ).terminal( 'input_listen', { readLine: function( line, e ) { assert.equal( line, 'y', "wrong content of input line" ); } } ), 1, "error registering input functions" );
         assert.lengthOf( $( '#terminal_test1 textarea' ).trigger( $.Event( 'keypress', { which: 'y'.charCodeAt(  0 ), keyCode: 'y'.charCodeAt(  0 ) } ) ), 1, "unable to trig 'keypress' 'y'" );
         assert.lengthOf( $( '#terminal_test1 textarea' ).trigger( $.Event( 'keydown', { which: 13, keyCode: 13 } ) ), 1, "unable to trig 'keydown' ENTER" );
         assert.lengthOf( $( '#terminal_test1' ).terminal( 'input_listen', { readLine: function( line, e ) { assert.isTrue( false, "should never be called" ); } } ), 1, "error registering input functions" );
-        assert.lengthOf( $( '#terminal_test1' ).terminal( 'prompt', true ), 1, "error turning on prompt" );
+        assert.lengthOf( $( '#terminal_test1' ).terminal( 'prompt_visibility', true ), 1, "error turning on prompt" );
         assert.lengthOf( $( '#terminal_test1 textarea' ).trigger( $.Event( 'keypress', { which: 'y'.charCodeAt(  0 ), keyCode: 'x'.charCodeAt(  0 ) } ) ), 1, "unable to trig 'keypress' 'x'" );
         assert.lengthOf( $( '#terminal_test1 textarea' ).trigger( $.Event( 'keydown', { which: 13, keyCode: 13 } ) ), 1, "unable to trig 'keydown' ENTER" );
 
@@ -246,6 +246,13 @@ describe( "terminal", function() {
         assert.equal( $( '#terminal_test1 #' + region.id + ' .line:last .content' ).text(), '', "new line was not empty" );
         assert.isObject( $( '#terminal_test1' ).terminal( 'type_line', { line: t, done: function() { s = $( '#terminal_test1 #' + region.id + ' .line:last .content' ).text(); clearInterval( i ); clearInterval( j ); assert.equal( s, t, 'wrong result string' ); done(); } } ), 1, "typewriter function failed" );
         assert.isNumber( j = setInterval( function() { $( '#terminal_test1 textarea' ).trigger( $.Event( 'keypress', { which: 'y'.charCodeAt(  0 ), keyCode: 'y'.charCodeAt(  0 ) } ) ); }, 200 ), "unable to trig 'keypress' 'y'" );
+
+    } );
+
+    it( "should have a working 'execute' function", function( done ) {
+
+        assert.isObject( $( '#terminal_test1' ).terminal( 'new_line' ), 1, "error adding newline" );
+        assert.isObject( $( '#terminal_test1' ).terminal( 'type_line', { line: 'testcommand foo', done: function() { $( '#terminal_test1' ).terminal( 'execute', { done: function( response ) { assert.equal( response.text[ 0 ], 'testcommand: Unknown command', "unexpected response text" ); done(); } } ) } } ), 1, "error executing command" );
 
     } );
 
