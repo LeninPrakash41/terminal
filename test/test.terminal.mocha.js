@@ -6,6 +6,7 @@ var assert = chai.assert,
     id1,
     id2,
     ln,
+    d,
     s,
     t,
     e,
@@ -235,12 +236,13 @@ describe( "terminal", function() {
         assert.isObject( region = $( '#terminal_test1' ).terminal( 'get_current_region' ), "error retrieving current region" );
         assert.isNumber( j = 0, "error initializing j as integer" );
         assert.isObject( $( '#terminal_test1' ).terminal( 'new_line' ), 1, "error entering newline" );
-        assert.isNumber( i = setInterval(function(){j++;s=$('#'+region.id+' .line:last .content').text();if(t.length==s.length){clearInterval(i);assert.isTrue(j>1,"string was written all at once, or too fast");done();}},100), "error creating timer for testing typewriter function" );
+        assert.isNumber( i=setInterval(function(){j++;s=$('#'+region.id+' .line:last .content').text();if(t.length==s.length){clearInterval(i);assert.isTrue(j>1,"string was written all at once, or too fast");done();}},10), "error creating timer for testing typewriter function" );
     
     } );
 
     it( "should not let keyboard input interfere while typewriting", function( done ) {
 
+        assert.lengthOf( $( '#terminal_test1' ).terminal( 'set_passive', false ), 1, "error disabling passive mode" );
         assert.isString( t = 'terminal keyboard simulation', "error initializing typewriter text" );
         assert.isObject( $( '#terminal_test1' ).terminal( 'new_line' ), 1, "error adding newline" );
         assert.equal( $( '#terminal_test1 #' + region.id + ' .line:last .content' ).text(), '', "new line was not empty" );
@@ -252,7 +254,37 @@ describe( "terminal", function() {
     it( "should have a working 'execute' function", function( done ) {
 
         assert.isObject( $( '#terminal_test1' ).terminal( 'new_line' ), 1, "error adding newline" );
-        assert.isObject( $( '#terminal_test1' ).terminal( 'type_line', { line: 'testcommand foo', done: function() { $( '#terminal_test1' ).terminal( 'execute', { done: function( response ) { assert.equal( response.text[ 0 ], 'testcommand: Unknown command', "unexpected response text" ); done(); } } ) } } ), 1, "error executing command" );
+        assert.isObject( $( '#terminal_test1' ).terminal( 'type_line', { line: 'testcommand foo', done: function( r ) { $( '#terminal_test1' ).terminal( 'execute', { done: function( response ) { assert.equal( response.text[ 0 ], 'testcommand: Unknown command', "unexpected response text" ); done(); } } ) } } ), 1, "error executing command" );
+
+    } );
+
+    it( "should have commands report themselves as 'done' whenever they are", function( done ) {
+
+        assert.isNumber( i = ( new Date() ).getMilliseconds(), "error reading current time" );
+        assert.lengthOf( $( '#terminal_test1' ).terminal( 'register_command', { name: 'delay_500_ms', main: function(c,v,e,r) { setTimeout( function( ) { r.done && r.done(); }, 500 ); } } ), 1, "unable to register new command" );
+        assert.lengthOf( $( '#terminal_test1' ).terminal( 'execute', { command: 'delay_500_ms', done: function( r ) { j = ( new Date() ).getMilliseconds(); assert.isTrue(  Math.abs( i - j ) > 400, "'done' called before function was done: time diff was " + ( i - j ) ); done(); } } ), 1, "error executing command" );
+
+    } );
+
+    it( "should not accept keystrokes while processing a command", function( done ) {
+
+        assert.isObject( region = $( '#terminal_test1' ).terminal( 'get_current_region' ), "error retrieving current region" );
+        assert.lengthOf( $( '#terminal_test1' ).terminal( 'register_command', { name: 'delay_700_ms', main: function(c,v,e,r) { setTimeout( function( ) { r.done && r.done(); }, 700 ); } } ), 1, "unable to register new command" );
+        assert.lengthOf( $( '#terminal_test1' ).terminal( 'execute', { command: 'delay_700_ms', done: function( r ) { assert.equal( $( '#' + region.id + ' .line:last .content' ).text(), '', "keystrokes went through during command-line processing" ); done(); } } ), 1, "error executing command" );
+        assert.lengthOf( $( '#terminal_test1 textarea' ).trigger( $.Event( 'keypress', { which: 'y'.charCodeAt(  0 ), keyCode: 'y'.charCodeAt(  0 ) } ) ), 1, "unable to trig 'keypress' 'y'" );
+
+    } );
+
+    it( "should queue up subsequent commands when running 'execute'", function( done ) {
+
+        assert.lengthOf( $( '#terminal_test1' ).terminal( 'register_command', { name: 'queue1', main: function(c,v,e,r) { setTimeout( function( ) { $( '#' + region.id + ' .line:last .content' ).append( 'x' ); r.done && r.done(); }, 500 ); } } ), 1, "unable to register command queue1" );
+        assert.lengthOf( $( '#terminal_test1' ).terminal( 'register_command', { name: 'queue2', main: function(c,v,e,r) { setTimeout( function( ) { $( '#' + region.id + ' .line:last .content' ).append( 'y' ); r.done && r.done(); }, 100 ); } } ), 1, "unable to register command queue2" );
+        assert.lengthOf( $( '#terminal_test1' ).terminal( 'register_command', { name: 'queue3', main: function(c,v,e,r) { setTimeout( function( ) { $( '#' + region.id + ' .line:last .content' ).append( 'z' ); r.done && r.done(); }, 200 ); } } ), 1, "unable to register command queue3" );
+        assert.isObject( $( '#terminal_test1' ).terminal( 'new_line' ), 1, "error adding newline" );
+        assert.lengthOf( $( '#terminal_test1' ).terminal( 'execute', { command: 'queue1', done: function( r ) { assert.equal( $( '#' + region.id + ' .line:last .content' ).text(), 'x', "input error - wrong sequence of commands" ); } } ), 1, "error executing command" );
+        assert.lengthOf( $( '#terminal_test1' ).terminal( 'execute', { command: 'queue2', done: function( r ) { assert.equal( $( '#' + region.id + ' .line:last .content' ).text(), 'xy', "input error - wrong sequence of commands" ); } } ), 1, "error executing command" );
+        assert.lengthOf( $( '#terminal_test1' ).terminal( 'execute', { command: 'queue3', done: function( r ) { assert.equal( $( '#' + region.id + ' .line:last .content' ).text(), 'xyz', "input error - wrong sequence of commands" ); } } ), 1, "error executing command" );
+        assert.lengthOf( $( '#terminal_test1' ).terminal( 'execute', { command: 'queue2', done: function( r ) { assert.equal( $( '#' + region.id + ' .line:last .content' ).text(), 'xyzy', "input error - wrong sequence of commands" ); done(); } } ), 1, "error executing command" );
 
     } );
 
