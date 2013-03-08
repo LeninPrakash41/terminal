@@ -1,291 +1,1100 @@
 
-var assert = chai.assert,
-    expect = chai.expect,
-    options,
-    region,
-    id1,
-    id2,
-    ln,
-    d,
-    s,
-    t,
-    e,
-    f,
-    i,
-    j;
+var assert = chai.assert;
 
 describe( "terminal", function() {
-
-    it( "should exist", function() {
-
-        assert.isFunction( $, "hey!? where's jQuery?" );
-        assert.isFunction( $.fn.terminal, "no terminal plugin in jQuery object" );
-
-    } );
-
-    it( "should load and initialize options", function() {
-
-        assert.lengthOf( $( '#terminal_test1' ).terminal(), 1, "blank initialization failed somehow" );
-        assert.lengthOf( $( '#terminal_test1 .__terminal__root__' ), 1, "didn't insert root HTML element" );
-        assert.isObject( options = $( '#terminal_test1 .__terminal__root__' ).data( 'options' ), "no option data related to current root element" );
-        assert.equal( options.cursorBlinkRate, 250, "wrong value for cursorBlinkRate" );
-        assert.lengthOf( $( '#terminal_test2' ).terminal( { cursorBlinkRate: 500 } ), 1, "initialization with options failed somehow" );
-        assert.isObject( options = $( '#terminal_test2 .__terminal__root__' ).data( 'options' ), "no option data related to current root element" );
-        assert.equal( options.cursorBlinkRate, 500, "wrong value for cursorBlinkRate" );
-        assert.isObject( options = $( '#terminal_test1' ).terminal( 'get_options' ), "unable to retrieve options object 1" );
-        assert.equal( options.cursorBlinkRate, 250, "options object 1 should have 'cursorBlinkRate' equal 250" );
-        assert.isObject( options = $( '#terminal_test2' ).terminal( 'get_options' ), "unable to retrieve options object 2" );
-        assert.equal( options.cursorBlinkRate, 500, "options object 1 should have 'cursorBlinkRate' equal 500" );
-        assert.lengthOf( $( '.outer_container' ).terminal( { cursorBlinkRate: 500 } ), 2, "initialization of both test elements failed" );
-        assert.match( id1 = $( '#terminal_test1 .__terminal__root__' ).attr( 'id' ), /^term_[0-9a-f]+/, "no unique ID assigned to 'terminal_test1'" );
-        assert.match( id2 = $( '#terminal_test2 .__terminal__root__' ).attr( 'id' ), /^term_[0-9a-f]+/, "no unique ID assigned to 'terminal_test2'" );
-        assert.notEqual( id1, id2, "terminal unique IDs not unique" );
-        assert.isObject( options = $( '#terminal_test1' ).terminal( 'get_options' ), "unable to retrieve options object 1" );
-        assert.equal( id1, options.id, "unique ID not stored in options object 1" );
-        assert.isObject( options = $( '#terminal_test2' ).terminal( 'get_options' ), "unable to retrieve options object 2" );
-        assert.equal( id2, options.id, "unique ID not stored in options object 2" );
-        assert.isObject( options = $( '#terminal_test1' ).terminal( 'get_options' ), "should retrieve options object for first element" );
-        assert.notEqual( id2, options.id, "should have been options object for element 1" );
-        assert.equal( id1, options.id, "this is not the options object for element 1" );
-        assert.isArray( options = [ ], "strange error declaring empty array" );
-        assert.lengthOf( $( '.outer_container' ).terminal( 'get_options', function( i, o ) { options.push( o ); } ), 2, "error fetching options by callback" );
-        assert.equal( id1, options[ 0 ].id, "unique ID for element 1 not stored in options array" );
-        assert.equal( id2, options[ 1 ].id, "unique ID for element 2 not stored in options array" );
-
-    } );
-
-    it( "should let client change prompt", function() {
-
-        assert.lengthOf( $( '#terminal_test1' ).terminal( 'prompt_text', 'terminal_test1$' ), 1, "unable to change prompt text for terminal 1" );
-        assert.lengthOf( $( '#terminal_test1' ).terminal( 'new_line' ), 1, "error inserting newline on terminal 1" );
-        assert.lengthOf( $( '#terminal_test2' ).terminal( 'prompt_text', 'terminal_test2$' ), 1, "unable to change prompt text for terminal 2" );
-        assert.lengthOf( $( '#terminal_test2' ).terminal( 'new_line' ), 1, "error inserting newline on terminal 2" );
-        assert.isObject( region = $( '#terminal_test1' ).terminal( 'get_current_region' ), "unable to retrieve current region for terminal 1" );
-        assert.equal( $( '#' + region.id + ' .lines .line:last .prompt' ).text(), 'terminal_test1$', "prompt text not correctly set on terminal 1" );
-        assert.isObject( region = $( '#terminal_test2' ).terminal( 'get_current_region' ), "unable to retrieve current region for terminal 2" );
-        assert.equal( $( '#' + region.id + ' .lines .line:last .prompt' ).text(), 'terminal_test2$', "prompt text not correctly set on terminal 2" );
-
-    } );
-
-    it( "should be chainable", function() {
-
-        assert.lengthOf( $( '.outer_container' ).terminal().filter( '#terminal_test2' ), 1, 'error filtering out test element 2' );
-        assert.lengthOf( $( '.outer_container' ).terminal( 'get_options', function( i, o ) { } ).filter( '#terminal_test2' ), 1, 'error filtering out test element 2 after get_options' );
-
-    } );
-
-    it( "should have regions", function() {
-
-        assert.isObject( options = $( '#terminal_test1' ).terminal( 'get_options' ), "unable to retrieve options object 1" );
-        assert.isArray( options.regions, "no region array" );
-        assert.isObject( options.regions[ 0 ], "no default region" );
-        assert.lengthOf( $( '#terminal_test1 .__terminal__root__ .regions' ), 1, "no regions element found" );
-        assert.lengthOf( $( '#terminal_test1 .__terminal__root__ .regions .region' ), 1, "no default region element found" );
-        assert.lengthOf( $( '#terminal_test1 .__terminal__root__ .regions #' + options.regions[ 0 ].id ), 1, "wrong or missing ID for default region" );
-        assert.lengthOf( $( '#terminal_test1' ).terminal( 'use_region', 'region A' ), 1, "unable to create and use new region" );
-        assert.isObject( options = $( '#terminal_test1' ).terminal( 'get_options' ), "unable to retrieve options object 1" );
-        assert.isObject( options.regions[ 1 ], "the new region was not created" );
-        assert.isObject( region = $( '#terminal_test1' ).terminal( 'get_current_region' ), "no current region" );
-        assert.equal( region.name, 'region A', "wrong current region" );
-        assert.equal( region.index, 1, "region A should have array index 1" );
-        assert.ok( $( '#' + region.id ).hasClass( 'current' ), "current region does not have class 'current'" );
-        assert.isFalse( $( '#terminal_test1 .region:not(#' + region.id + ')' ).hasClass( 'current' ), "unselected regions also have class 'current'" );
-        assert.lengthOf( $( '#terminal_test1' ).terminal( 'use_region', 'default' ), 1, "unable to return to default region" );
-        assert.isObject( region = $( '#terminal_test1' ).terminal( 'get_current_region' ), "no current region" );
-        assert.equal( region.name, 'default', "wrong current region" );
-        assert.equal( region.index, 0, "default region should have array index 0" );
-        assert.lengthOf( $( '#terminal_test1 .region.current' ), 1, "there chould only be one current region" );
-        assert.lengthOf( $( '#terminal_test1' ).terminal( 'remove_region', 'region A' ), 1, "unable to remove region A" );
-        assert.lengthOf( $( '#terminal_test1 .regions .region' ), 1, "there should only be one region left in DOM" );
-        assert.isObject( options = $( '#terminal_test1' ).terminal( 'get_options' ), "unable to retrieve options object 1" );
-        assert.lengthOf( options.regions, 1, "there should only be one region left in regions array" );
-        assert.lengthOf( $( '#terminal_test1' ).terminal( 'remove_region', 'default' ), 1, "'remove_region' not found" );
-        assert.isObject( options = $( '#terminal_test1' ).terminal( 'get_options' ), "unable to retrieve options object 1" );
-        assert.lengthOf( options.regions, 1, "there should still be one region left in regions array" );
-        assert.lengthOf( $( '#terminal_test1 .regions .region' ), 1, "there should still be one region in DOM" );
-        assert.equal( options.regions[ 0 ].name, 'default', "default region not having index 0" );
-        assert.lengthOf( $( '#terminal_test1' ).terminal( 'use_region', 'region A' ).find( '.region' ), 2, "failed adding 'region A'" );
-        assert.lengthOf( $( '#terminal_test1' ).terminal( 'use_region', 'region B' ).find( '.region' ), 3, "failed adding 'region B'" );
-        assert.lengthOf( $( '#terminal_test1' ).terminal( 'use_region', 'region C' ).find( '.region' ), 4, "failed adding 'region C'" );
-        assert.lengthOf( $( '#terminal_test1' ).terminal( 'use_region', 'region D' ).find( '.region' ), 5, "failed adding 'region D'" );
-        assert.lengthOf( $( '#terminal_test1' ).terminal( 'use_region', 'region E' ).find( '.region' ), 6, "failed adding 'region E'" );
-        assert.lengthOf( $( '#terminal_test1' ).terminal( 'use_region', 'region B' ).find( '.region' ), 6, "selecting existing region altered region count" );
-        assert.isObject( region = $( '#terminal_test1' ).terminal( 'get_current_region' ), "unable to retrieve region object for 'region B" );
-        assert.lengthOf( $( '#terminal_test1 .region .lines .line .cursor' ), 1, "expected one cursor element" );
-        assert.lengthOf( $( '#' + region.id + ' .cursor' ), 1, "current region is missing a cursor" );
-        assert.equal( region.index, 2, "region B should have index 2" );
-        assert.lengthOf( $( '#terminal_test1' ).terminal( 'clear_all' ).find( '.region' ), 1, "clearing all should reduce number of regions to 1" );
-        assert.isObject( region = $( '#terminal_test1' ).terminal( 'get_current_region' ), "unable to retrieve current region object" );
-        assert.equal( region.name, 'default', "should have reverted to default region" );
-
-    } );
-
-    it( "should have regions with lines", function() {
-
-        assert.lengthOf( $( '#terminal_test1 .region.current ul.lines' ), 1, "expected a list of lines" );
-        assert.lengthOf( $( '#terminal_test1 .region.current ul.lines .line.n1' ), 1, "expected to find line 1" );
-        assert.lengthOf( ln = $( '#terminal_test1 .region.current ul.lines .line' ), 1, "wrong line count before call to 'write_line'" );
-        assert.isObject( $( '#terminal_test1' ).terminal( 'write_line', 'hello, world!' ), "error writing line" );
-        assert.equal( $( ln[ 0 ] ).find( '.content' ).text(), 'hello, world!', "line was not written" );
-        assert.lengthOf( $( '#terminal_test1 .region.current .line' ), 2, "wrong line count after call to 'write_line'" );
-        assert.lengthOf( $( '#terminal_test1 .region.current .line:last .cursor' ), 1, "the cursor should have moved to the last line" );
-
-    } );
-
-    it( "should be activated on focus", function() {
-
-        assert.isFalse( $( '#terminal_test1 .__terminal__root__' ).hasClass( 'focus' ), "terminal should not have focus at this point" );
-        assert.lengthOf( $( '#terminal_test1 .__terminal__root__ textarea' ).focus(), 1, "didn't find textarea overlay" );
-        assert.lengthOf( $( '#terminal_test1' ).terminal( 'focus' ), 1, "failed in calling 'focus' directly (Firefox workaround)" );
-        assert.isTrue( $( '#terminal_test1 .__terminal__root__' ).hasClass( 'focus' ), "terminal should have focus at this point" );
-
-    } );
-
-    it( "should have a blinking cursor with correct blink rate", function( done ) {
-
-        assert.isObject( options = $( '#terminal_test1' ).terminal( 'get_options' ), "unable to retrieve options object 1" );
-        assert.isObject( e = $( '#terminal_test1 .cursor' ) );
-        assert.isNumber( j = options.cursorBlinkRate, "error retrieving cursorBlinkRate from options object" );
-        assert.isBoolean( f = e.hasClass( 'blink' ), "error returning blink state" );
-        assert.isNumber( i = setInterval( function(){ assert.isFalse( f === e.hasClass( 'blink' ) ); clearInterval( i ); done(); }, j ), "cursor doesn't blink" );
-
-    } );
-
-    it( "shold keep the cursor from blinking when terminal looses focus", function( done ) {
-
-        assert.isObject( options = $( '#terminal_test1' ).terminal( 'get_options' ), "unable to retrieve options object 1" );
-        assert.isObject( e = $( '#terminal_test1 .cursor' ) );
-        assert.isNumber( j = options.cursorBlinkRate );
-        assert.lengthOf( $( '#terminal_test1' ).terminal( 'focusout' ), 1, "failed in calling 'focusout' directly" );
-        assert.isFalse( e.hasClass( 'blink' ), "should not blink" );
-        assert.isNumber( i = setInterval( function(){ assert.isFalse( e.hasClass( 'blink' ) ); clearInterval( i ); done(); }, j ), "should not blink" );
-
-    } );
-
-    it( "should respond properly to keyboard events", function() {
-
-        assert.lengthOf( $( '#terminal_test1 .__terminal__root__ textarea' ).focus(), 1, "didn't find textarea overlay" );
-        assert.lengthOf( $( '#terminal_test1' ).terminal( 'focus' ), 1, "failed in calling 'focus' directly (Firefox workaround)" );
-        assert.lengthOf( $( '#terminal_test1 textarea' ).trigger( $.Event( 'keypress', { which: 101, keyCode: 101 } ) ), 1, "unable to trig 'keypress' e" );
-        assert.lengthOf( $( '#terminal_test1 textarea' ).trigger( $.Event( 'keypress', { which: 115, keyCode: 115 } ) ), 1, "unable to trig 'keypress' s" );
-        assert.lengthOf( $( '#terminal_test1 textarea' ).trigger( $.Event( 'keypress', { which: 112, keyCode: 112 } ) ), 1, "unable to trig 'keypress' p" );
-        assert.lengthOf( $( '#terminal_test1 textarea' ).trigger( $.Event( 'keypress', { which: 101, keyCode: 101 } ) ), 1, "unable to trig 'keypress' e" );
-        assert.lengthOf( $( '#terminal_test1 textarea' ).trigger( $.Event( 'keypress', { which: 110, keyCode: 110 } ) ), 1, "unable to trig 'keypress' n" );
-        assert.isObject( region = $( '#terminal_test1' ).terminal( 'get_current_region' ), "no current region" );
-        assert.equal( $( '#terminal_test1 #' + region.id + ' .line:last .content' ).text(), 'espen', "the string 'espen' was not correctly written to terminal" );
-        assert.lengthOf( $( '#terminal_test1 textarea' ).trigger( $.Event( 'keydown', { which: 13, keyCode: 13 } ) ), 1, "unable to trig 'keypress'" );
-        assert.equal( $( '#terminal_test1 #' + region.id + ' .line:last .content' ).text(), '', "didn't create new line upon return" );
-
-    } );
-
-    it( "should trig a callback for a registered command", function() {
-
-        assert.lengthOf( $( '#terminal_test1' ).terminal( 'register_command', {name:'test',main:function(c,v){assert.equal(v[1],'success');$( '#terminal_test1' ).terminal('new_line');}}), 1, "failed in registering test command" );
-        assert.isString( t = 'test success', "unable to create command string" );
-        assert.lengthOf( $( '#terminal_test1 textarea' ).trigger( $.Event( 'keypress', { which: t.charCodeAt(  0 ), keyCode: t.charCodeAt(  0 ) } ) ), 1, "unable to trig 'keypress' 't'" );
-        assert.lengthOf( $( '#terminal_test1 textarea' ).trigger( $.Event( 'keypress', { which: t.charCodeAt(  1 ), keyCode: t.charCodeAt(  1 ) } ) ), 1, "unable to trig 'keypress' 'e'" );
-        assert.lengthOf( $( '#terminal_test1 textarea' ).trigger( $.Event( 'keypress', { which: t.charCodeAt(  2 ), keyCode: t.charCodeAt(  2 ) } ) ), 1, "unable to trig 'keypress' 's'" );
-        assert.lengthOf( $( '#terminal_test1 textarea' ).trigger( $.Event( 'keypress', { which: t.charCodeAt(  3 ), keyCode: t.charCodeAt(  3 ) } ) ), 1, "unable to trig 'keypress' 't'" );
-        assert.lengthOf( $( '#terminal_test1 textarea' ).trigger( $.Event( 'keypress', { which: t.charCodeAt(  4 ), keyCode: t.charCodeAt(  4 ) } ) ), 1, "unable to trig 'keypress' ' '" );
-        assert.lengthOf( $( '#terminal_test1 textarea' ).trigger( $.Event( 'keypress', { which: t.charCodeAt(  5 ), keyCode: t.charCodeAt(  5 ) } ) ), 1, "unable to trig 'keypress' 's'" );
-        assert.lengthOf( $( '#terminal_test1 textarea' ).trigger( $.Event( 'keypress', { which: t.charCodeAt(  6 ), keyCode: t.charCodeAt(  6 ) } ) ), 1, "unable to trig 'keypress' 'u'" );
-        assert.lengthOf( $( '#terminal_test1 textarea' ).trigger( $.Event( 'keypress', { which: t.charCodeAt(  7 ), keyCode: t.charCodeAt(  7 ) } ) ), 1, "unable to trig 'keypress' 'c'" );
-        assert.lengthOf( $( '#terminal_test1 textarea' ).trigger( $.Event( 'keypress', { which: t.charCodeAt(  8 ), keyCode: t.charCodeAt(  8 ) } ) ), 1, "unable to trig 'keypress' 'c'" );
-        assert.lengthOf( $( '#terminal_test1 textarea' ).trigger( $.Event( 'keypress', { which: t.charCodeAt(  9 ), keyCode: t.charCodeAt(  9 ) } ) ), 1, "unable to trig 'keypress' 'e'" );
-        assert.lengthOf( $( '#terminal_test1 textarea' ).trigger( $.Event( 'keypress', { which: t.charCodeAt( 10 ), keyCode: t.charCodeAt( 10 ) } ) ), 1, "unable to trig 'keypress' 's'" );
-        assert.lengthOf( $( '#terminal_test1 textarea' ).trigger( $.Event( 'keypress', { which: t.charCodeAt( 11 ), keyCode: t.charCodeAt( 11 ) } ) ), 1, "unable to trig 'keypress' 's'" );
-        assert.lengthOf( $( '#terminal_test1 textarea' ).trigger( $.Event( 'keydown', { which: 13, keyCode: 13 } ) ), 1, "unable to trig 'keydown' ENTER" );
-
-    } );
-
-    it( "should trig a callback for reading input", function() {
-
-        assert.isObject( options = $( '#terminal_test1' ).terminal( 'get_options' ), "unable to retrieve options for terminal 1" );
-        assert.isTrue( options.promptVisibility, "promptVisibility should have been true" );
-        assert.lengthOf( $( '#terminal_test1' ).terminal( 'prompt_visibility', false ), 1, "error turning off prompt" );
-        assert.isFalse( options.promptVisibility, "promptVisibility should have been false (turned off)" );
-        assert.lengthOf( $( '#terminal_test1' ).terminal( 'input_listen', { readLine: function( line, e ) { assert.equal( line, 'y', "wrong content of input line" ); } } ), 1, "error registering input functions" );
-        assert.lengthOf( $( '#terminal_test1 textarea' ).trigger( $.Event( 'keypress', { which: 'y'.charCodeAt(  0 ), keyCode: 'y'.charCodeAt(  0 ) } ) ), 1, "unable to trig 'keypress' 'y'" );
-        assert.lengthOf( $( '#terminal_test1 textarea' ).trigger( $.Event( 'keydown', { which: 13, keyCode: 13 } ) ), 1, "unable to trig 'keydown' ENTER" );
-        assert.lengthOf( $( '#terminal_test1' ).terminal( 'input_listen', { readLine: function( line, e ) { assert.isTrue( false, "should never be called" ); } } ), 1, "error registering input functions" );
-        assert.lengthOf( $( '#terminal_test1' ).terminal( 'prompt_visibility', true ), 1, "error turning on prompt" );
-        assert.lengthOf( $( '#terminal_test1 textarea' ).trigger( $.Event( 'keypress', { which: 'y'.charCodeAt(  0 ), keyCode: 'x'.charCodeAt(  0 ) } ) ), 1, "unable to trig 'keypress' 'x'" );
-        assert.lengthOf( $( '#terminal_test1 textarea' ).trigger( $.Event( 'keydown', { which: 13, keyCode: 13 } ) ), 1, "unable to trig 'keydown' ENTER" );
-
-    } );
-
-    it( "should have passive/active mode", function() {
-
-        assert.isObject( options = $( '#terminal_test1' ).terminal( 'get_options' ), "unable to retrieve options for terminal 1" );
-        assert.isBoolean( options.passiveMode, "no passive mode flag" );
-        assert.isFalse( options.passiveMode, "should initially have been active (passiveMode = false)" );
-        assert.isObject( region = $( '#terminal_test1' ).terminal( 'get_current_region' ), "unable to retrieve current region from terminal 1" );
-        assert.lengthOf( $( '#terminal_test1 textarea' ).trigger( $.Event( 'keypress', { which: 'x'.charCodeAt(  0 ), keyCode: 'x'.charCodeAt(  0 ) } ) ), 1, "unable to trig 'keypress' 'x'" );
-        assert.equal( $( '#terminal_test1 #' + region.id + ' .line:last .content' ).text(), 'x', "current line should be 'x'" );
-        assert.lengthOf( $( '#terminal_test1' ).terminal( 'set_passive', true ), 1, "error entering passive mode" );
-        assert.lengthOf( $( '#terminal_test1 textarea' ).trigger( $.Event( 'keypress', { which: 'y'.charCodeAt(  0 ), keyCode: 'y'.charCodeAt(  0 ) } ) ), 1, "unable to trig 'keypress' 'y'" );
-        assert.equal( $( '#terminal_test1 #' + region.id + ' .line:last .content' ).text(), 'x', "current line should still be 'x' after keystrokes" );
     
+
+    it( "should exist as jQuery namespace",
+
+    function() {
+
+        assert.isFunction( $.fn.terminal,
+
+            "no terminal plugin in jQuery object" );
     } );
 
-    it( "should have a typewriter function", function( done ) {
 
-        assert.isString( s = '', "strange error declaring empty string" );
-        assert.isString( t = 'terminal keyboard simulation', "error initializing typewriter text" );
-        assert.isObject( $( '#terminal_test1' ).terminal( 'type_line', t ), 1, "typewriter function failed" );
-        assert.isObject( region = $( '#terminal_test1' ).terminal( 'get_current_region' ), "error retrieving current region" );
-        assert.isNumber( j = 0, "error initializing j as integer" );
-        assert.isObject( $( '#terminal_test1' ).terminal( 'new_line' ), 1, "error entering newline" );
-        assert.isNumber( i=setInterval(function(){j++;s=$('#'+region.id+' .line:last .content').text();if(t.length==s.length){clearInterval(i);assert.isTrue(j>1,"string was written all at once, or too fast");done();}},10), "error creating timer for testing typewriter function" );
-    
+    it( "should initialize and return as chainable jQuery",
+
+    function() {
+
+        assert.lengthOf( 
+
+            $( '#terminal_test1' ).terminal(),
+
+                1,
+
+            "blank initialization failed somehow" );
     } );
 
-    it( "should not let keyboard input interfere while typewriting", function( done ) {
 
-        assert.lengthOf( $( '#terminal_test1' ).terminal( 'set_passive', false ), 1, "error disabling passive mode" );
-        assert.isString( t = 'terminal keyboard simulation', "error initializing typewriter text" );
-        assert.isObject( $( '#terminal_test1' ).terminal( 'new_line' ), 1, "error adding newline" );
-        assert.equal( $( '#terminal_test1 #' + region.id + ' .line:last .content' ).text(), '', "new line was not empty" );
-        assert.isObject( $( '#terminal_test1' ).terminal( 'type_line', { line: t, done: function() { s = $( '#terminal_test1 #' + region.id + ' .line:last .content' ).text(); clearInterval( i ); clearInterval( j ); assert.equal( s, t, 'wrong result string' ); done(); } } ), 1, "typewriter function failed" );
-        assert.isNumber( j = setInterval( function() { $( '#terminal_test1 textarea' ).trigger( $.Event( 'keypress', { which: 'y'.charCodeAt(  0 ), keyCode: 'y'.charCodeAt(  0 ) } ) ); }, 200 ), "unable to trig 'keypress' 'y'" );
+    it( "should insert a root HTML element",
+
+    function() {
+
+        $( '#terminal_test1' ).terminal();
+
+        assert.lengthOf(
+
+            $( '#terminal_test1 .__terminal__root__' ),
+
+                1,
+
+            "didn't insert root HTML element" );
+    } );
+
+
+    it( "should have default options",
+
+    function() {
+
+        $( '#terminal_test1' ).terminal();
+
+        var options = $( '#terminal_test1 .__terminal__root__' ).data( 'options' );
+
+        assert.equal(
+
+            options.cursorBlinkRate, 250,
+
+            "wrong value for cursorBlinkRate" );
+    } );
+
+
+    it( "should let user-defined parameters override default options",
+
+    function() {
+
+        $( '#terminal_test1' ).terminal( { cursorBlinkRate: 500 } );
+
+        var options = $( '#terminal_test1 .__terminal__root__' ).data( 'options' );
+
+        assert.equal(
+
+            options.cursorBlinkRate, 500,
+
+            "value for cursorBlinkRate was not set correctly" );
+    } );
+
+
+    it( "should have different sets of options for different terminal instances",
+
+    function() {
+
+        $( '#terminal_test1' ).terminal( { cursorBlinkRate: 500 } );
+        $( '#terminal_test2' ).terminal( { cursorBlinkRate: 600 } );
+
+        var options1 = $( '#terminal_test1' ).terminal( 'get_options' ),
+            options2 = $( '#terminal_test2' ).terminal( 'get_options' );
+
+        assert.notEqual(
+
+            options1.cursorBlinkRate,
+            options2.cursorBlinkRate,
+
+            "blink rate for terminal 1 should be different from terminal 2" );
+    } );
+
+
+    it( "should assign an ID to terminal instances",
+
+    function() {
+
+        $( '#terminal_test1' ).terminal();
+
+        assert.match(
+            
+            $( '#terminal_test1 .__terminal__root__' ).attr( 'id' ),
+
+            /^term_[0-9a-f]+/,
+
+            "terminal 1 did not have a correctly formatted ID" );
+    } );
+
+
+    it( "should produce unique terminal IDs for different instances",
+
+    function() {
+
+        $( '#terminal_test1' ).terminal();
+        $( '#terminal_test2' ).terminal();
+
+        assert.notEqual(
+            
+            $( '#terminal_test1 .__terminal__root__' ).attr( 'id' ),
+
+            $( '#terminal_test2 .__terminal__root__' ).attr( 'id' ),
+
+            "terminal 1 and 2 received same ID value" );
+    } );
+
+
+    it( "should write the unique ID to options.id object member",
+
+    function() {
+
+        var termdiv = $( '#terminal_test1' ).terminal(),
+            options = termdiv.terminal( 'get_options' );
+
+        assert.equal(
+            
+            $( '#terminal_test1 .__terminal__root__' ).attr( 'id' ),
+
+            options.id,
+
+            "terminal ID was not present in options.id" );
+    } );
+
+
+    it( "returns options for first terminal when calling 'get_options' on multiple elements with no callback",
+
+    function() {
+
+        $( '.terminals #terminal_test1' ).terminal( { cursorBlinkRate: 300 } );
+        $( '.terminals #terminal_test2' ).terminal( { cursorBlinkRate: 500 } );
+
+        var optionsX = $( '.terminals>div' ).terminal( 'get_options' );
+
+        assert.equal(
+            
+            optionsX.cursorBlinkRate,
+
+            300,
+
+            "didn't return options for terminal 1 as expected" );
+    } );
+
+
+    it( "returns options for all terminals when calling 'get_options' on multiple elements with callback",
+
+    function() {
+
+        var optionsA = [ ];
+
+        $( '.terminals #terminal_test1' ).terminal();
+        $( '.terminals #terminal_test2' ).terminal();
+        
+        $( '.terminals>div' ).terminal( 'get_options', function( index, retVal ) {
+
+            optionsA.push( retVal );
+
+        } );
+
+        assert.notEqual(
+            
+            optionsA[ 0 ].id,
+
+            optionsA[ 1 ].id,
+
+            "both terminals had same ID value" );
+    } );
+
+
+    it( "should allow for client to change prompt text",
+
+    function() {
+
+        var newPromptText = 'terminalTestPrompt$',
+            termdiv = $( '#terminal_test1' ).terminal(),
+            region = termdiv.terminal( 'get_current_region' );
+        
+        termdiv
+            .terminal( 'prompt_text', newPromptText )
+            .terminal( 'new_line' );
+
+        assert.equal(
+
+            termdiv
+                .find( '#' + region.id + ' .line:last .prompt' )
+                .text(),
+
+            newPromptText,
+
+            "the new prompt text was not set" );
 
     } );
 
-    it( "should have a working 'execute' function", function( done ) {
 
-        assert.isObject( $( '#terminal_test1' ).terminal( 'new_line' ), 1, "error adding newline" );
-        assert.isObject( $( '#terminal_test1' ).terminal( 'type_line', { line: 'testcommand foo', done: function( r ) { $( '#terminal_test1' ).terminal( 'execute', { done: function( response ) { assert.equal( response.text[ 0 ], 'testcommand: Unknown command', "unexpected response text" ); done(); } } ) } } ), 1, "error executing command" );
+    it( "should be chainable in the jQuery fashion",
+
+    function() {
+
+        var jQueryElements = 
+            $( '.terminals>div' )
+                .terminal()
+                .filter( '#terminal_test1' )
+                .terminal( 'prompt_text', 'foo' )
+                .end()
+                .filter( '#terminal_test2' )
+                .terminal( 'prompt_text', 'bar' );
+
+        assert.lengthOf(
+
+            jQueryElements, 1,
+
+            "wrong number of items in jQuery object after chaining" );
 
     } );
+
+
+    it( "should have regions",
+
+    function() {
+
+        var termdiv = $( '#terminal_test1' ).terminal(),
+            options = termdiv.terminal( 'get_options' ),
+            regions = options.regions;
+
+        assert.lengthOf(
+
+            termdiv
+                .find( '.regions .region#' + regions[ 0 ].id ),
+
+            1,
+
+            "unable to find default region (0) in DOM" );
+
+    } );
+
+
+    it( "should let users use different regions",
+
+    function() {
+
+        var termdiv =
+                $( '#terminal_test1' )
+                    .terminal()
+                    .terminal( 'use_region', 'testRegionA' ),
+        
+
+            options = termdiv.terminal( 'get_options' ),
+            regions = options.regions;
+
+        assert.isTrue(
+
+            termdiv
+                .find( '.regions .region#' + regions[ 1 ].id )
+                .hasClass( 'current' ),
+
+            "new region was not marked as current" );
+
+    } );
+
+
+    it( "should create new regions on the fly",
+
+    function() {
+
+        var termdiv =
+                $( '#terminal_test1' )
+                    .terminal()
+                    .terminal( 'use_region', 'testRegionA' )
+                    .terminal( 'use_region', 'testRegionB' )
+                    .terminal( 'use_region', 'testRegionC' )
+                    .terminal( 'use_region', 'testRegionD' ),        
+
+            options = termdiv.terminal( 'get_options' ),
+            regions = options.regions;
+
+        assert.lengthOf(
+
+            termdiv
+                .find( '.regions .region' ),
+
+            5,
+
+            "should have been 4 regions plus the default one" );
+
+    } );
+
+
+    it( "should be able to remove a region",
+
+    function() {
+
+        var termdiv =
+                $( '#terminal_test1' )
+                    .terminal()
+                    .terminal( 'use_region', 'testRegionA' )
+                    .terminal( 'use_region', 'testRegionB' )
+                    .terminal( 'use_region', 'testRegionC' )
+                    .terminal( 'use_region', 'testRegionD' ),        
+
+            options = termdiv.terminal( 'get_options' ),
+            regions = options.regions,
+            regionCount = options.regions.length;
+
+        assert.lengthOf(
+
+            termdiv
+                .terminal( 'remove_region', 'testRegionC' )
+                .find( '.regions .region' ),
+
+            regionCount - 1,
+
+            "should be one region less than before 'remove_region'" );
+
+    } );
+
+
+    it( "should have a method for retrieving the region currently in use",
+
+    function() {
+
+        var termdiv =
+                $( '#terminal_test1' )
+                    .terminal()
+                    .terminal( 'use_region', 'regionA' )
+                    .terminal( 'use_region', 'regionB' )
+                    .terminal( 'use_region', 'regionC' )
+                    .terminal( 'use_region', 'regionD' )
+                    .terminal( 'use_region', 'regionB' ),
+
+            options = termdiv.terminal( 'get_options' ),
+            regions = options.regions,
+            regionB = options.regions[ 2 ];
+
+        assert.equal(
+
+            termdiv
+                .terminal( 'get_current_region' ),
+
+            regionB,
+
+            "should return regionB as current" );
+
+    } );
+
+
+    it( "should have a method for clearing all regions",
+
+    function() {
+
+        var termdiv =
+                $( '#terminal_test1' )
+                    .terminal()
+                    .terminal( 'use_region', 'regionA' )
+                    .terminal( 'use_region', 'regionB' )
+                    .terminal( 'use_region', 'regionC' )
+                    .terminal( 'use_region', 'regionD' ),
+
+            options = termdiv.terminal( 'get_options' ),
+            regions = options.regions;
+
+        assert.equal(
+
+            termdiv
+                .terminal( 'clear_all' )
+                .find( '.regions .region' )
+                .length,
+
+            1,
+
+            "should have only the default region left" );
+
+    } );
+
+
+    it( "should revert to default region when clearing all regions",
+
+    function() {
+
+        var currentRegion =
+                $( '#terminal_test1' )
+                    .terminal()
+
+                    .terminal( 'use_region', 'regionA' )
+                    .terminal( 'use_region', 'regionB' )
+                    .terminal( 'use_region', 'regionC' )
+                    .terminal( 'use_region', 'regionD' )
+
+                    .terminal( 'clear_all' )
+
+                    .terminal( 'get_current_region' );
+
+        assert.equal(
+
+            currentRegion.name,
+
+            'default',
+
+            "should have default region currently in use" );
+
+    } );
+
+
+    it( "should have regions with lines",
+
+    function() {
+
+        var termdiv = $( '#terminal_test1' ),
+            currentRegion =
+                termdiv
+                    .terminal()
+                    .terminal( 'get_current_region' );
+
+        termdiv
+            .terminal( 'new_line' )
+            .terminal( 'new_line' )
+            .terminal( 'new_line' )
+            .terminal( 'new_line' );
+
+        assert.lengthOf(
+
+            termdiv
+                .find( '#' + currentRegion.id + ' .lines .line' ),
+
+            5,
+
+            "should have 5 lines after 4 new_line commands" );
+
+    } );
+
+
+    it( "should be able to write a line",
+
+    function() {
+
+        var lineText = 'Hello, world! Test if line is writable...',
+            
+            termdiv = 
+                $( '#terminal_test1' )
+                    .terminal()
+                    .terminal( 'write_line', lineText ),
+
+            currentRegion =
+                termdiv
+                    .terminal( 'get_current_region' ),
+            
+            lines =
+                termdiv
+                    .find( '#' + currentRegion.id + ' .lines .line' );
+
+        assert.equal(
+
+            $( lines[ 0 ] )
+                .find( '.content' )
+                .text(),
+
+            lineText,
+
+            "the text was not entered into the current line" );
+
+    } );
+
+
+    it( "should have a cursor that follows newlines",
+
+    function() {
+
+        var 
+            termdiv = 
+                $( '#terminal_test1' )
+                    .terminal()
+                    .terminal( 'write_line', 'test line 1' )
+                    .terminal( 'write_line', 'test line 2' )
+                    .terminal( 'write_line', 'test line 3' )
+                    .terminal( 'write_line', 'test line 4' ),
+
+            region = 
+                termdiv
+                    .terminal( 'get_current_region' ),
+
+            lines =
+                termdiv
+                    .find( '#' + region.id + ' .lines .line' );
+
+        assert.lengthOf(
+
+            $( lines[ 4 ] )
+                .find( '.cursor' ),
+
+            1,
+
+            "the cursor was not moved to line 5 (array subscript 4)" );
+
+    } );
+
+
+    it( "should be activated on focus",
+
+    function() {
+
+        assert.isTrue(
+
+        $( '#terminal_test1' )
+            .terminal()
+            .terminal( 'focus' )
+            .find( '.__terminal__root__' )
+            .hasClass( 'focus' ),
+
+            "terminal did not receive input focus" );
+
+    } );
+
+
+    it( "should have a blinking cursor with correct blink rate",
+
+    function( done ) {
+
+        var
+            termdiv = $( '#terminal_test1' ).
+                terminal(),
+
+            options =
+                termdiv
+                    .terminal( 'get_options' ),
+
+            cursorElement =
+                termdiv
+                    .terminal( 'focus' )
+                    .find( '.cursor' ),
+
+            cursorBlinkState =
+                cursorElement
+                    .hasClass( 'blink' ),
+
+            timer = 
+                setInterval(
+                    function() {
+
+                        assert.notEqual(
+
+                            cursorBlinkState,
+
+                            cursorElement.hasClass( 'blink' ),
+
+                            "cursor is not blinking" );
+
+                        clearInterval( timer );
+                        done();
+                    
+                    }, options.cursorBlinkRate );
+
+    } );
+
+
+    it( "should keep the cursor from blinking when terminal looses focus",
+
+    function( done ) {
+
+        var
+            termdiv = $( '#terminal_test1' )
+                .terminal(),
+
+            options =
+                termdiv
+                    .terminal( 'get_options' ),
+
+            cursorElement =
+                termdiv
+                    .find( '.cursor' );
+
+        termdiv
+            .terminal( 'focusout' );
+
+        var
+            blinkState =
+                cursorElement
+                    .hasClass( '.blink' ),
+            
+            timer =
+                setInterval(
+                    function() {
+                        
+                        assert.ok( 
+
+                            blinkState === false &&
+                            cursorElement.hasClass( 'blink' ) === false,
+
+                            "cursor is still blinking" );
+                        
+                        clearInterval( timer );
+                        done();
+
+                    }, options.cursorBlinkRate );
+
+    } );
+
+
+    it( "should respond to keyboard events",
+
+    function() {
+
+        var 
+            i,
+
+            termdiv =
+                $( '#terminal_test1' )
+                    .terminal(),
+
+            region =
+                termdiv
+                    .terminal( 'focus' )
+                    .find( 'textarea' )
+
+                    // Simulate puncing 'espen' on the keyboard
+                    .trigger( $.Event( 'keypress', { which: 101, keyCode: 101 } ) )
+                    .trigger( $.Event( 'keypress', { which: 115, keyCode: 115 } ) )
+                    .trigger( $.Event( 'keypress', { which: 112, keyCode: 112 } ) )
+                    .trigger( $.Event( 'keypress', { which: 101, keyCode: 101 } ) )
+                    .trigger( $.Event( 'keypress', { which: 110, keyCode: 110 } ) )
+
+                    .end()
+                    .terminal( 'get_current_region' );
+
+        assert.equal(
+
+            termdiv
+                .find( '#' + region.id + ' .line:last .content' )
+                .text(),
+
+            'espen',
+
+            "the string 'espen' was not correctly written to terminal" );
+
+    } );
+
+
+    it( "should trig a callback for a registered command",
+
+    function( done ) {
+
+        var 
+            i,
+
+            termdiv =
+                $( '#terminal_test1' )
+                    .terminal(),
+
+            commandString = 'test success',
+
+            commandObject = {
+
+                name: 'test',
+
+                main: function( argc, argv, termElement ) {
+
+                    assert.equal(
+
+                        argv[ 1 ],
+
+                        'success',
+
+                    "command not sucessfully entered" );
+
+                    done();
+                }
+
+            };
+
+
+        termdiv
+            .terminal( 'register_command', commandObject );
+
+        for( i = 0; i < commandString.length; i++ ) {
+            termdiv
+                .find( 'textarea' )
+                .trigger( $.Event( 'keypress', { 
+                    which: commandString.charCodeAt( i ),
+                    keyCode: commandString.charCodeAt( i ) } ) );
+        }
+        
+        termdiv
+            .find( 'textarea' )
+            .trigger(
+                $.Event( 'keydown', { 
+                    which: 13,
+                    keyCode: 13 } ) );
+
+    } );
+
+
+    it( "should trig a callback for reading input line",
+
+    function( done ) {
+
+        $( '#terminal_test1' )
+            .terminal()
+            .terminal( 'prompt_visibility', false )
+            .terminal( 'input_listen', {
+                
+                readLine:
+                    
+                    function( line, termElement ) {
+
+                        assert.equal(
+
+                            line,
+
+                            'y',
+
+                            "wrong content of input line" );
+
+                        done();
+                    }
+                
+                } )
+            
+            .find( 'textarea' )
+            .trigger( $.Event( 'keypress', { which: 'y'.charCodeAt(  0 ), keyCode: 'y'.charCodeAt(  0 ) } ) )
+            .trigger( $.Event( 'keydown', { which: 13, keyCode: 13 } ) );
+
+    } );
+
+
+    it( "should have passive/active mode blocking/allowing keyboard input",
+
+    function() {
+
+        var
+            termdiv =
+                $( '#terminal_test1' ),
+
+            region =
+                termdiv
+                    .terminal( 'new_line' )
+                    // Passive mode: Ignore keystrokes
+                    .terminal( 'set_passive', true )
+                    .find( 'textarea' )
+                    .trigger(
+                        $.Event( 'keypress', { 
+                            which: 'x'.charCodeAt( 0 ),
+                            keyCode: 'x'.charCodeAt( 0 )
+                        } ) )
+                    .end()
+                    // Active mode: Record keystrokes
+                    .terminal( 'set_passive', false )
+                    .find( 'textarea' )
+                    .trigger(
+                        $.Event( 'keypress', { 
+                            which: 'y'.charCodeAt( 0 ),
+                            keyCode: 'y'.charCodeAt( 0 )
+                        } ) )
+                    .end()
+                    .terminal( 'get_current_region' );
+
+        assert.equal(
+
+            termdiv
+                .find( '#' + region.id + ' .line:last .content' )
+                .text(),
+
+            'y',
+
+            "wrong keyboard input, only the second keystroke should be recorded" );
+
+    } );
+
+
+    it( "should mimic a typewriter when 'type_line' is invoked",
+
+    function( done ) {
+
+        var
+            text = 'terminal typewriter simulation',
+
+            buffer = '',
+
+            region =
+                $( '#terminal_test1' )
+                    .terminal( 'type_line', text )
+                    .terminal( 'new_line' )
+                    .terminal( 'get_current_region' ),
+
+            j = 0,
+
+            timer =
+                setInterval(
+                    
+                    function() {
+                    
+                        j++;
+                        buffer = $( '#' + region.id + ' .line:last .content' ).text();
+                    
+                        if( buffer.length === text.length ) {
+                            clearInterval( timer );
+
+                            assert.isTrue(
+
+                                j > 5,
+
+                                "string was written all at once, or too fast" );
+                        
+                            done();
+                        }
+                    
+                    }, 10 );
+    } );
+
+
+    it( "should not let keyboard input interfere while typewriting",
+
+    function( done ) {
+
+        var
+            line = "terminal typewriter text",
+
+            termdiv = $( '#terminal_test1' ),
+
+            region = termdiv.terminal( 'get_current_region' ),
+
+            timer;
+
+        termdiv
+            .terminal( 'new_line' )
+            .terminal( 'type_line', {
+                line: line, 
+                done:
+                    function() {
+                        clearInterval( timer );
+                        assert.equal(
+
+                            termdiv
+                                .find( '#' + region.id + ' .line:last .content' )
+                                .text(),
+
+                            line,
+
+                            "keyboard event interferred with typewriter simulation" );
+                        
+                        done();
+                    }
+                } );
+
+        // Inject keystrokes during typewriting
+        timer =
+            setInterval(
+                function() {
+
+                    termdiv
+                        .find( 'textarea' )
+                        .trigger( $.Event( 'keypress', { which: 'y'.charCodeAt( 0 ), keyCode: 'y'.charCodeAt( 0 ) } ) );
+
+                }, 100 );
+
+    } );
+
+
+    it( "should have a working 'execute' function",
+
+    function( done ) {
+
+        $( '#terminal_test1' )
+            .terminal()
+            .terminal( 'new_line' )
+            .terminal( 'type_line', {
+                line: 'testcommand foo',
+                done:
+                    function( response ) {
+                        $( '#terminal_test1' )
+                            .terminal( 'execute', {
+                                done:
+                                    function( response ) {
+
+                                        assert.equal(
+
+                                            response.text[ 0 ],
+
+                                            'testcommand: Unknown command',
+
+                                            "unexpected response text" );
+
+                                        done();
+                                    }
+                            } )
+                    }
+                } );
+
+    } );
+
 
     it( "should have commands report themselves as 'done' whenever they are", function( done ) {
 
-        assert.isNumber( i = ( new Date() ).getMilliseconds(), "error reading current time" );
-        assert.lengthOf( $( '#terminal_test1' ).terminal( 'register_command', { name: 'delay_500_ms', main: function(c,v,e,r) { setTimeout( function( ) { r.done && r.done(); }, 500 ); } } ), 1, "unable to register new command" );
-        assert.lengthOf( $( '#terminal_test1' ).terminal( 'execute', { command: 'delay_500_ms', done: function( r ) { j = ( new Date() ).getMilliseconds(); assert.isTrue(  Math.abs( i - j ) > 400, "'done' called before function was done: time diff was " + ( i - j ) ); done(); } } ), 1, "error executing command" );
+        var
+            startTime = ( new Date() ).getTime();
+
+        $( '#terminal_test1' )
+            .terminal()
+            .terminal( 'register_command', {
+                name: 'delay_500_ms',
+                main:
+                    function( argc, argv, termElement, response ) {
+                        setTimeout(
+                            function() {
+                                response.done && response.done();
+                            }, 500 );
+                    }
+                } )
+            .terminal( 'execute', {
+                command: 'delay_500_ms',
+                done:
+                    function( response ) {
+                        var endTime = ( new Date() ).getTime(),
+                            duration = endTime - startTime;
+
+                        assert.isTrue(
+                            
+                            // Firefox timeouts sometimes returns a bit too early (!),
+                            // thus the 10 ms error margin made explicit here:
+                            duration >= ( 500 - 10 ),
+
+                            "'done' was called before function was done: time diff was " + duration + "ms" );
+
+                        done();
+                    }
+                } );
+    } );
+
+
+    it( "should not accept keystrokes while processing a command",
+
+    function( done ) {
+
+        var
+            termdiv =
+                $( '#terminal_test1' )
+                    .terminal(),
+
+            region =
+                termdiv
+                    .terminal( 'get_current_region' );
+
+
+        termdiv
+            .terminal( 'register_command', {
+                name: 'delay_700_ms',
+                main:
+                    function( argc, argv, termElement, response ) {
+                        setTimeout(
+                            function() {
+                                response.done && response.done();
+                            },
+                        700 );
+                    }
+                } )
+            .terminal( 'execute', {
+                command: 'delay_700_ms',
+                done:
+                    function( response ) {
+
+                        assert.equal(
+
+                            termdiv
+                                .find( '#' + region.id + ' .line:last .content' )
+                                .text(),
+
+                            '',
+
+                            "keystrokes went through during command-line processing" );
+
+                        done();
+                    }
+                } )
+            .find( 'textarea' )
+            .trigger(
+                $.Event( 'keypress', {
+                    which: 'y'.charCodeAt( 0 ),
+                    keyCode: 'y'.charCodeAt( 0 )
+                } ) );
 
     } );
 
-    it( "should not accept keystrokes while processing a command", function( done ) {
 
-        assert.isObject( region = $( '#terminal_test1' ).terminal( 'get_current_region' ), "error retrieving current region" );
-        assert.lengthOf( $( '#terminal_test1' ).terminal( 'register_command', { name: 'delay_700_ms', main: function(c,v,e,r) { setTimeout( function( ) { r.done && r.done(); }, 700 ); } } ), 1, "unable to register new command" );
-        assert.lengthOf( $( '#terminal_test1' ).terminal( 'execute', { command: 'delay_700_ms', done: function( r ) { assert.equal( $( '#' + region.id + ' .line:last .content' ).text(), '', "keystrokes went through during command-line processing" ); done(); } } ), 1, "error executing command" );
-        assert.lengthOf( $( '#terminal_test1 textarea' ).trigger( $.Event( 'keypress', { which: 'y'.charCodeAt(  0 ), keyCode: 'y'.charCodeAt(  0 ) } ) ), 1, "unable to trig 'keypress' 'y'" );
+    it( "should queue up subsequent commands and run them sequentially when using 'execute'", function( done ) {
 
-    } );
+        var
+            termdiv =
+                $( '#terminal_test1' )
+                    .terminal(),
 
-    it( "should queue up subsequent commands when running 'execute'", function( done ) {
+            region =
+                termdiv
+                    .terminal( 'get_current_region' ),
 
-        assert.lengthOf( $( '#terminal_test1' ).terminal( 'register_command', { name: 'queue1', main: function(c,v,e,r) { setTimeout( function( ) { $( '#' + region.id + ' .line:last .content' ).append( 'x' ); r.done && r.done(); }, 500 ); } } ), 1, "unable to register command queue1" );
-        assert.lengthOf( $( '#terminal_test1' ).terminal( 'register_command', { name: 'queue2', main: function(c,v,e,r) { setTimeout( function( ) { $( '#' + region.id + ' .line:last .content' ).append( 'y' ); r.done && r.done(); }, 100 ); } } ), 1, "unable to register command queue2" );
-        assert.lengthOf( $( '#terminal_test1' ).terminal( 'register_command', { name: 'queue3', main: function(c,v,e,r) { setTimeout( function( ) { $( '#' + region.id + ' .line:last .content' ).append( 'z' ); r.done && r.done(); }, 200 ); } } ), 1, "unable to register command queue3" );
-        assert.isObject( $( '#terminal_test1' ).terminal( 'new_line' ), 1, "error adding newline" );
-        assert.lengthOf( $( '#terminal_test1' ).terminal( 'execute', { command: 'queue1', done: function( r ) { assert.equal( $( '#' + region.id + ' .line:last .content' ).text(), 'x', "input error - wrong sequence of commands" ); } } ), 1, "error executing command" );
-        assert.lengthOf( $( '#terminal_test1' ).terminal( 'execute', { command: 'queue2', done: function( r ) { assert.equal( $( '#' + region.id + ' .line:last .content' ).text(), 'xy', "input error - wrong sequence of commands" ); } } ), 1, "error executing command" );
-        assert.lengthOf( $( '#terminal_test1' ).terminal( 'execute', { command: 'queue3', done: function( r ) { assert.equal( $( '#' + region.id + ' .line:last .content' ).text(), 'xyz', "input error - wrong sequence of commands" ); } } ), 1, "error executing command" );
-        assert.lengthOf( $( '#terminal_test1' ).terminal( 'execute', { command: 'queue2', done: function( r ) { assert.equal( $( '#' + region.id + ' .line:last .content' ).text(), 'xyzy', "input error - wrong sequence of commands" ); done(); } } ), 1, "error executing command" );
+            queue1 =
+                function( argc, argv, termElement, response ) {
+                    setTimeout(
+                        function() {
+                            termdiv
+                                .find( '#' + region.id + ' .line:last .content' )
+                                .append( 'x' );
+                            response.done && response.done();
+                        },
+                    90 );
+                },
 
+            queue2 =
+                function( argc, argv, termElement, response ) {
+                    setTimeout(
+                        function() {
+                            termdiv
+                                .find( '#' + region.id + ' .line:last .content' )
+                                .append( 'y' );
+                            response.done && response.done();
+                        },
+                    70 );
+                },
+
+            queue3 =
+                function( argc, argv, termElement, response ) {
+                    setTimeout(
+                        function() {
+                            termdiv
+                                .find( '#' + region.id + ' .line:last .content' )
+                                .append( 'z' );
+                            response.done && response.done();
+                        },
+                    50 );
+                };
+
+        termdiv
+            .terminal( 'register_command', {
+                name: 'queue1', 
+                main: queue1
+                } )
+            .terminal( 'register_command', {
+                name: 'queue2', 
+                main: queue2
+                } )
+            .terminal( 'register_command', {
+                name: 'queue3', 
+                main: queue3
+                } )
+            .terminal( 'execute', {
+                command: 'queue1',
+                done:
+                    function( response ) {
+                    }
+                } )
+            .terminal( 'execute', {
+                command: 'queue2',
+                done:
+                    function( response ) {
+                    }
+                } )
+            .terminal( 'execute', {
+                command: 'queue3',
+                done:
+                    function( response ) {
+                    }
+                } )
+            .terminal( 'execute', {
+                command: 'queue2',
+                done:
+                    function( response ) {
+                        assert.equal(
+
+                            $( '#' + region.id + ' .line:last .content' )
+                                .text(),
+
+                            'xyzy',
+
+                            "input error - wrong sequence of commands" );
+
+                        done();
+
+                    }
+                } );
     } );
 
 } );
