@@ -2,7 +2,6 @@ describe( "windowManager", function() {
 
     it( "should exist as jQuery namespace", function() {
 
-        assert.isFunction( $, "hey!? where's jQuery?" );
         assert.isFunction( $.fn.windowManager, "no windowManager plugin in jQuery object" );
 
     } );
