@@ -4,6 +4,18 @@
 		"selected_items":
 		[
 			[
+				"terminal",
+				"terminal_test1"
+			],
+			[
+				"cursor",
+				"cursorElement"
+			],
+			[
+				"passiv",
+				"passiveMode"
+			],
+			[
 				"get_",
 				"get_current_region"
 			],
@@ -18,10 +30,6 @@
 			[
 				"inde",
 				"regionIndex"
-			],
-			[
-				"terminal",
-				"terminal_test2"
 			],
 			[
 				"list",
@@ -211,7 +219,7 @@
 			"file": "lib/terminal/terminal.cmd.core.js",
 			"settings":
 			{
-				"buffer_size": 2750,
+				"buffer_size": 2648,
 				"line_ending": "Unix"
 			}
 		},
@@ -240,6 +248,14 @@
 			}
 		},
 		{
+			"file": "lib/windowmanager/windowmanager.css",
+			"settings":
+			{
+				"buffer_size": 285,
+				"line_ending": "Unix"
+			}
+		},
+		{
 			"file": "lib/jquery/jquery-1.9.1.js",
 			"settings":
 			{
@@ -251,15 +267,18 @@
 			"file": "lib/terminal/terminal.js",
 			"settings":
 			{
-				"buffer_size": 11236,
+				"buffer_size": 13703,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "test/test.terminal.mocha.js",
+			"contents": "( function( $ ) {\n\n	var\n		ROOT_SELECTOR = '.__window__manager__root__',\n\n		that,\n		root,\n		options,\n\n		windows = { },\n\n		public_members = {\n			'open_window': openWindow\n		};\n\n	// Produce a random, unique hexadecimal ID string\n	function getUniqueId( prefix ) {\n		return prefix + Math.floor( 0xFFFFFFFF * Math.random() ).toString( 16 );\n	}\n\n	function init( _options ) {\n		root =\n			$( that )\n				.html( '<div class=\"' + ROOT_SELECTOR.substring( 1 ) + '\"></div>' )\n				.find( ROOT_SELECTOR );\n	}\n\n	function openWindow( param ) {\n\n		var\n			hwnd = getUniqueId( 'win_' );\n\n		windows[ hwnd ] =\n			root\n				.prepend( '<div class=\"window\" id=\"' + hwnd + '\"><div class=\"mainFrm\"></div></div>' )\n				.find( '#' + hwnd )\n				.css( {\n					width: ( param && param.width ) || 0,\n					height: ( param && param.height ) || 0\n					} );\n	}\n\n	function saveOptions() {\n\n	}\n\n	// Expose interface\n	$.fn.windowManager = function( param ) {\n\n		var retVal,\n			index = 0,\n			argv = arguments,\n			argc = argv.length;\n\n		this.each( function() {\n			that = $( this );\n			if( param === undefined || typeof param === 'object' ) {\n				// Initialization\n				init.apply( this, [ param ] );\n				saveOptions();\n			}\n			else if( public_members[ param ] !== undefined ) {\n				// Call to public member				\n				root = that.find( ROOT_SELECTOR );\n				options = $( root ).data( 'options' );\n				retVal = public_members[ param ].apply( this, Array.prototype.slice.call( argv, 1 ) );\n				// Callback func should be the last argument\n				if( argc > 0 && typeof argv[ argc - 1 ] === 'function' ) {\n					// Pass return value for each element to callback function\n					( argv[ argc - 1 ] )( index, retVal );\n					saveOptions();\n					retVal = null;\n				}\n				else {\n					saveOptions();\n					// No callback; break loop if return value was present\n					if( retVal ) return false;\n				}\n			}\n			else {\n				$.error( 'Method not found in windowManager' );\n			}\n			index++;\n		} );\n		// Maintain chainability unless returning something\n		return retVal || this;\n	}\n\n} )( jQuery );",
+			"file": "lib/windowmanager/windowmanager.js",
+			"file_size": 2024,
+			"file_write_time": 1362753561000000,
 			"settings":
 			{
-				"buffer_size": 18972,
+				"buffer_size": 2021,
 				"line_ending": "Unix"
 			}
 		},
@@ -267,7 +286,23 @@
 			"file": "test/test.terminal.mocha.html",
 			"settings":
 			{
-				"buffer_size": 989,
+				"buffer_size": 1433,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "test/test.windowmanager.mocha.js",
+			"settings":
+			{
+				"buffer_size": 1996,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "test/test.terminal.mocha.js",
+			"settings":
+			{
+				"buffer_size": 28389,
 				"line_ending": "Unix"
 			}
 		}
@@ -300,6 +335,11 @@
 	},
 	"file_history":
 	[
+		"/prosjekter/terminal/lib/terminal/window.css",
+		"/prosjekter/terminal/lib/terminal/window.js",
+		"/prosjekter/terminal/test/test.window.mocha.js",
+		"/prosjekter/terminal/test/testem.yml",
+		"/prosjekter/terminal/terminal.sublime-project",
 		"/Users/n21131/Library/Caches/Cleanup At Startup/Transmit/EC18007C-4D7B-40DA-B0AF-5F3352ACB76D/index.html",
 		"/prosjekter/terminal/www/index.html",
 		"/Users/n21131/Library/Caches/Cleanup At Startup/Transmit/36D9EEA5-C306-4521-979A-651BC170BCE6/index.html",
@@ -312,7 +352,6 @@
 		"/prosjekter/terminal/test/node_modules/testem/node_modules/underscore/index.html",
 		"/prosjekter/terminal/test/node_modules/testem/node_modules/socket.io/node_modules/policyfile/doc/index.html",
 		"/prosjekter/terminal/lib/terminal/terminal.js",
-		"/prosjekter/terminal/test/testem.yml",
 		"/prosjekter/terminal/test/test.console.mocha.js",
 		"/prosjekter/terminal/test/test.console.mocha.html",
 		"/prosjekter/giverlandet/sandcastle/lib/serum/sandbox.js",
@@ -406,6 +445,15 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"\n        ",
+			"setPassive",
+			"setPassive(",
+			"options.passiveMode = ",
+			"passive",
+			"setPassive",
+			"passive",
+			"prompt",
+			"PROMPT",
 			"( argc, argv",
 			"		$( '#terminal1' )\n			.terminal( { cursorBlinkRate: 500, prompt: 'term 01' } );\n",
 			"options =",
@@ -524,16 +572,7 @@
 			"assert",
 			"<",
 			"		\n",
-			".sel ul",
-			".cat .sel ul",
-			"disubmnu",
-			"textbody h3",
-			"view",
-			"h1 span",
-			"legend",
-			"panel",
-			"listwrapper",
-			"updateView"
+			".sel ul"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -569,7 +608,7 @@
 	"groups":
 	[
 		{
-			"selected": 3,
+			"selected": 5,
 			"sheets":
 			[
 				{
@@ -594,7 +633,7 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 403.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -604,15 +643,15 @@
 					"file": "lib/terminal/terminal.cmd.core.js",
 					"settings":
 					{
-						"buffer_size": 2750,
+						"buffer_size": 2648,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1593,
-								1593
+								2055,
+								2055
 							]
 						],
 						"settings":
@@ -621,7 +660,7 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 810.0,
+						"translation.y": 1221.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -665,8 +704,8 @@
 						"selection":
 						[
 							[
-								1026,
-								1026
+								799,
+								895
 							]
 						],
 						"settings":
@@ -676,7 +715,7 @@
 							"word_wrap": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 232.0,
+						"translation.y": 41.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -707,36 +746,30 @@
 						"zoom_level": 1.0
 					},
 					"type": "text"
-				}
-			]
-		},
-		{
-			"selected": 0,
-			"sheets":
-			[
+				},
 				{
 					"buffer": 5,
-					"file": "lib/jquery/jquery-1.9.1.js",
+					"file": "lib/windowmanager/windowmanager.css",
 					"settings":
 					{
-						"buffer_size": 268381,
+						"buffer_size": 285,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								266100,
-								266100
+								230,
+								230
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"syntax": "Packages/CSS/CSS.tmLanguage",
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 143496.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -749,18 +782,18 @@
 			[
 				{
 					"buffer": 6,
-					"file": "lib/terminal/terminal.js",
+					"file": "lib/jquery/jquery-1.9.1.js",
 					"settings":
 					{
-						"buffer_size": 11236,
+						"buffer_size": 268381,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								301,
-								301
+								259289,
+								259289
 							]
 						],
 						"settings":
@@ -769,7 +802,7 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 138991.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -777,51 +810,83 @@
 			]
 		},
 		{
-			"selected": 0,
+			"selected": 1,
 			"sheets":
 			[
 				{
 					"buffer": 7,
-					"file": "test/test.terminal.mocha.js",
+					"file": "lib/terminal/terminal.js",
 					"settings":
 					{
-						"buffer_size": 18972,
+						"buffer_size": 13703,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								18801,
-								18801
+								6172,
+								6336
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/Mocha/Mocha.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"translate_tabs_to_spaces": false
 						},
-						"translation.x": 1.0,
-						"translation.y": 2673.0,
+						"translation.x": 0.0,
+						"translation.y": 3916.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 8,
-					"file": "test/test.terminal.mocha.html",
+					"file": "lib/windowmanager/windowmanager.js",
 					"settings":
 					{
-						"buffer_size": 989,
+						"buffer_size": 2021,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								296,
-								296
+								667,
+								667
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 164.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				}
+			]
+		},
+		{
+			"selected": 1,
+			"sheets":
+			[
+				{
+					"buffer": 9,
+					"file": "test/test.terminal.mocha.html",
+					"settings":
+					{
+						"buffer_size": 1433,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								715,
+								715
 							]
 						],
 						"settings":
@@ -831,7 +896,63 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 92.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 10,
+					"file": "test/test.windowmanager.mocha.js",
+					"settings":
+					{
+						"buffer_size": 1996,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1418,
+								1418
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Mocha/Mocha.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 968.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 11,
+					"file": "test/test.terminal.mocha.js",
+					"settings":
+					{
+						"buffer_size": 28389,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2144,
+								2347
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Mocha/Mocha.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 1278.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
