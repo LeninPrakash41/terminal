@@ -1,16 +1,5 @@
-.__window_manager__root__,
-.__window_manager__root__ .window {
-	position: relative;
-}
-
-.__window_manager__root__ .window .mainFrm {
-	border: solid 1px #000;
-	padding: 0;
+.__window__manager__root__ .window {
 	position: absolute;
-	height: auto;
-	bottom: 0px;
-	top: 0px;
-	left: 0;
-	right: 0;
-	background-color: transparent;
+	top: 10px;
+	left: 10px;
 }
