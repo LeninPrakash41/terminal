@@ -162,6 +162,38 @@ describe( "windowManager", function() {
 
     } );
 
+    it( "should give the close button a title corresponding to the wndClose attribute",
+
+    function() {
+
+        var
+            testClose =
+                'Close',
+
+            winman =
+                $( '#window_manager' )
+                    .windowManager(),
+
+            wndclass = {
+                width: 250,
+                height: 250,
+                wndClose: testClose
+            };
+
+        assert.equal(
+
+            $.trim(
+                winman
+                    .windowManager( 'open_window', wndclass )
+                    .find( '.__window__manager__root__ .window .titleBar .close' )
+                    .attr( 'title' ) ),
+
+            testClose,
+
+            "new window did not receive the coorect close butteon title" );
+
+    } );
+
     it( "should give the window a title string provided in the wndTitle attribute",
 
     function() {
@@ -236,6 +268,78 @@ describe( "windowManager", function() {
             250,
 
             "wrong width of new window" );
+
+    } );
+
+    it( "should put window in focus when clicked",
+
+    function() {
+
+        var
+            winman =
+                $( '#window_manager' )
+                    .windowManager(),
+
+            wndclass = {
+                width: 250,
+                height: 250
+            },
+
+            windows =
+                winman
+                    .windowManager( 'open_window', wndclass )
+                    .windowManager( 'open_window', wndclass )
+                    .windowManager( 'open_window', wndclass )
+                    .windowManager( 'open_window', wndclass )
+                    .windowManager( 'open_window', wndclass )
+                    .find( '.window' );
+
+            $( windows[ 3 ] )
+                .trigger( new $.Event( 'click' ) );
+
+            assert.isTrue(
+
+                $( windows[ 3 ] ).hasClass( 'focus' ),
+
+                "clicked window did not receive focus" );
+
+    } );
+
+    it( "should put window on top of z-order when clicked",
+
+    function() {
+
+        var
+            winman =
+                $( '#window_manager' )
+                    .windowManager(),
+
+            wndclass = {
+                width: 250,
+                height: 250
+            },
+
+            windows =
+                winman
+                    .windowManager( 'open_window', wndclass )
+                    .windowManager( 'open_window', wndclass )
+                    .windowManager( 'open_window', wndclass )
+                    .windowManager( 'open_window', wndclass )
+                    .windowManager( 'open_window', wndclass )
+                    .find( '.window' );
+
+            $( windows[ 3 ] )
+                .trigger( new $.Event( 'click' ) );
+
+            assert.equal(
+
+                $( windows[ 3 ] ).css( 'z-index' ),
+
+                14,
+
+                "clicked window did not have correct z-index" );
+
+        $( '#window_manager *' ).remove();
 
     } );
 
