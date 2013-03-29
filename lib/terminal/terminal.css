@@ -70,7 +70,7 @@
 }
 .__terminal__root__ textarea.overlay {
 	position: absolute;
-	top: -20px;
+	top: 0;
 	left: 0;
 	border-style: none;
 	-webkit-user-modify: read-write-plaintext-only;
