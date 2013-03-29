@@ -457,47 +457,4 @@ describe( "windowManager", function() {
 
         } );
 
-    it( "should have a 'reorganize' function", function() {
-
-        var
-
-            wndclass1 = {
-                width: 250,
-                height: 250,
-                wndProc:
-                    function( winInfo ) { }
-            },
-
-            wndclass2 = {
-                width: 100,
-                height: 400,
-                wndProc:
-                    function( winInfo ) { }
-            },
-
-            wndclass3 = {
-                width: 400,
-                height: 250,
-                wndProc:
-                    function( winInfo ) { }
-            },
-
-            wndclass4 = {
-                width: 250,
-                height: 250,
-                wndProc:
-                    function( winInfo ) { }
-            };
-
-            $( '#window_manager' )
-                .windowManager()
-                .windowManager( 'open_window', wndclass1 )
-                .windowManager( 'open_window', wndclass2 )
-                .windowManager( 'open_window', wndclass3 )
-                .windowManager( 'open_window', wndclass4 )
-                .windowManager( 'reorganize' );
-
-            $( '#window_manager *' ).remove();
-        } );
-
 } );
