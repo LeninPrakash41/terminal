@@ -791,7 +791,7 @@ describe( "terminal", function() {
     function( done ) {
 
         var
-            text = 'terminal typewriter simulation',
+            text = 'typewriter simulation',
 
             buffer = '',
 
@@ -1096,5 +1096,116 @@ describe( "terminal", function() {
                     }
                 } );
     } );
+
+    it( "should not queue up commands runned with the async flag set to true when using 'execute'", function( done ) {
+
+        var
+            termdiv =
+                $( '#terminal_test1' )
+                    .terminal(),
+
+            region =
+                termdiv
+                    .terminal( 'get_current_region' ),
+
+            queue1 =
+                function( argc, argv, termElement, response ) {
+                    setTimeout(
+                        function() {
+                            termdiv
+                                .find( '#' + region.id + ' .line:last .content' )
+                                .append( 'x' );
+                            response.done && response.done();
+                        },
+                    40 );
+                },
+
+            queue2 =
+                function( argc, argv, termElement, response ) {
+                    setTimeout(
+                        function() {
+                            termdiv
+                                .find( '#' + region.id + ' .line:last .content' )
+                                .append( 'y' );
+                            response.done && response.done();
+                        },
+                    70 );
+                };
+
+        termdiv
+            .terminal( 'register_command', {
+                name: 'queue1', 
+                main: queue1
+                } )
+            .terminal( 'register_command', {
+                name: 'queue2', 
+                main: queue2
+                } )
+
+            .terminal( 'execute', {
+                command: 'queue1',
+                async: true,
+                done:
+                    function( response ) {
+                    }
+                } )
+            .terminal( 'execute', {
+                command: 'queue2',
+                async: true,
+                done:
+                    function( response ) {
+                    }
+                } )
+            .terminal( 'execute', {
+                command: 'queue2',
+                async: true,
+                done:
+                    function( response ) {
+                    }
+                } )
+            .terminal( 'execute', {
+                command: 'queue2',
+                async: true,
+                done:
+                    function( response ) {
+                        assert.equal(
+
+                            $( '#' + region.id + ' .line:last .content' )
+                                .text(),
+
+                            'xyyy',
+
+                            "input error - wrong sequence of commands" );
+
+                        done();
+
+                    }
+                } );
+    } );
+
+    it( "should be able to execute batch scripts", function( done ) {
+
+        var
+            termdiv =
+                $( '#terminal_test1' )
+                    .terminal()
+                    .terminal( 'run_script', {
+                            script: 'test_batch_script.bat',
+                            done:
+                                function( response ) {
+                                    
+                                    assert.equal(
+
+                                        response.text[ 0 ],
+
+                                        "testnoexisting: Unknown command",
+
+                                        "batch script was not executed" );
+
+                                    done();
+                                }
+                        } );
+
+        } );
 
 } );

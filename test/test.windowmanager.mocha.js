@@ -343,4 +343,161 @@ describe( "windowManager", function() {
 
     } );
 
+    it( "should dispatch notififation event when window closes",
+
+    function( done ) {
+
+        var
+            winman =
+                $( '#window_manager' )
+                    .windowManager(),
+
+            wndclass = {
+                width: 250,
+                height: 250
+            },
+
+            closeBtn =
+                winman
+                    .windowManager( 'open_window', wndclass )
+                    .find( '.window .titleBar a' );
+
+            winman.on( 'notify', function( e ) {
+
+                assert.equal(
+
+                    e.msg,
+
+                    'close_window',
+
+                    "'close_window' event was not fired" );
+
+                done();
+
+            } );
+
+            $( closeBtn )
+                .trigger( new $.Event( 'click' ) );
+
+        $( '#window_manager *' ).remove();
+
+    } );
+
+    it( "should have a 'send_message' function",
+
+    function( done ) {
+
+        var
+            winman =
+                $( '#window_manager' )
+                    .windowManager(),
+
+            wndclass = {
+                width: 250,
+                height: 250
+            },
+
+            win =
+                winman
+                    .windowManager( 'open_window', wndclass )
+                    .find( '.window' );
+
+            win.on( 'wm_testmessage', function( e ) {
+
+                assert.equal(
+
+                    e.msg,
+
+                    'wm_testmessage',
+
+                    "test message did not arrive" );
+                    
+                    done();
+            } );
+
+            winman
+                .windowManager( 'send_message', { msg: 'wm_testmessage' } );
+
+        $( '#window_manager *' ).remove();
+
+    } );
+
+    it( "should have a 'move_window' function", function( done ) {
+
+        var
+            wndclass = {
+                width: 250,
+                height: 250,
+                wndProc:
+                    function( winInfo ) {
+
+                        var
+                            win =
+                                $( '#window_manager' )
+                                    .windowManager( 'move_window', winInfo.hWnd, { top: 76, left: 33 } )
+                                    .find( '#' + winInfo.hWnd );
+
+                        assert.equal(
+
+                            win.css( 'top' ) +
+                            'X' +
+                            win.css( 'left' ),
+
+                            '76pxX33px',
+
+                            "wrong window position" );
+
+                        done();
+                    }
+            };
+
+            $( '#window_manager' )
+                .windowManager()
+                .windowManager( 'open_window', wndclass );
+
+        } );
+
+    it( "should have a 'reorganize' function", function() {
+
+        var
+
+            wndclass1 = {
+                width: 250,
+                height: 250,
+                wndProc:
+                    function( winInfo ) { }
+            },
+
+            wndclass2 = {
+                width: 100,
+                height: 400,
+                wndProc:
+                    function( winInfo ) { }
+            },
+
+            wndclass3 = {
+                width: 400,
+                height: 250,
+                wndProc:
+                    function( winInfo ) { }
+            },
+
+            wndclass4 = {
+                width: 250,
+                height: 250,
+                wndProc:
+                    function( winInfo ) { }
+            };
+
+            $( '#window_manager' )
+                .windowManager()
+                .windowManager( 'open_window', wndclass1 )
+                .windowManager( 'open_window', wndclass2 )
+                .windowManager( 'open_window', wndclass3 )
+                .windowManager( 'open_window', wndclass4 )
+                .windowManager( 'reorganize' );
+
+            $( '#window_manager *' ).remove();
+        } );
+
 } );
