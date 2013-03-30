@@ -791,7 +791,7 @@ describe( "terminal", function() {
     function( done ) {
 
         var
-            text = 'typewriter simulation',
+            text = 'simulation',
 
             buffer = '',
 
@@ -823,7 +823,7 @@ describe( "terminal", function() {
                             done();
                         }
                     
-                    }, 10 );
+                    }, 20 );
     } );
 
 
