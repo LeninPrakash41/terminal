@@ -235,7 +235,7 @@
 			"file": "lib/terminal/terminal.css",
 			"settings":
 			{
-				"buffer_size": 1510,
+				"buffer_size": 1506,
 				"line_ending": "Unix"
 			}
 		},
@@ -299,7 +299,7 @@
 			"file": "lib/windowmanager/windowmanager.js",
 			"settings":
 			{
-				"buffer_size": 9337,
+				"buffer_size": 5921,
 				"line_ending": "Unix"
 			}
 		},
@@ -655,7 +655,7 @@
 					"file": "lib/terminal/terminal.css",
 					"settings":
 					{
-						"buffer_size": 1510,
+						"buffer_size": 1506,
 						"regions":
 						{
 						},
@@ -849,7 +849,7 @@
 			]
 		},
 		{
-			"selected": 1,
+			"selected": 0,
 			"sheets":
 			[
 				{
@@ -864,8 +864,8 @@
 						"selection":
 						[
 							[
-								1407,
-								1407
+								963,
+								963
 							]
 						],
 						"settings":
@@ -873,8 +873,8 @@
 							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
 							"translate_tabs_to_spaces": false
 						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.x": 1.0,
+						"translation.y": 532.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -884,15 +884,15 @@
 					"file": "lib/windowmanager/windowmanager.js",
 					"settings":
 					{
-						"buffer_size": 9337,
+						"buffer_size": 5921,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								6755,
-								6755
+								0,
+								0
 							]
 						],
 						"settings":
@@ -909,7 +909,7 @@
 			]
 		},
 		{
-			"selected": 1,
+			"selected": 3,
 			"sheets":
 			[
 				{
@@ -935,7 +935,7 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 23.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -963,7 +963,7 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 6864.0,
+						"translation.y": 3550.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -1006,8 +1006,8 @@
 						"selection":
 						[
 							[
-								31618,
-								31618
+								31200,
+								31805
 							]
 						],
 						"settings":
@@ -1017,7 +1017,7 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 17623.0,
+						"translation.y": 17607.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
