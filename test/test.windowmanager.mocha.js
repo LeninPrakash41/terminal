@@ -440,7 +440,9 @@ describe( "windowManager", function() {
                         assert.equal(
 
                             win.css( 'top' ) +
+                            
                             'X' +
+                            
                             win.css( 'left' ),
 
                             '76pxX33px',
