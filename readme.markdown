@@ -1,7 +1,7 @@
 # Terminal jQuery plugin
 Turns any div element into a customizable, bash-style terminal window with the option to open windows with user-provided content. Any custom-made command may be added through the jQuery interface.
 
-## Quick example
+## Hello World!
 ```html
 <html>
 <head>
@@ -43,3 +43,5 @@ Turns any div element into a customizable, bash-style terminal window with the o
 </body>
 </html>
 ```
+## License
+This jQuery plugin is released under the (MIT license)[http://opensource.org/licenses/MIT]. Feel free to redistribute and/or modify it any way you like. I would be happy to know of any successful implementations out there.
