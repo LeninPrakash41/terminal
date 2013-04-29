@@ -251,7 +251,7 @@
 			"file": "lib/terminal/terminal.cmd.about.js",
 			"settings":
 			{
-				"buffer_size": 1555,
+				"buffer_size": 534,
 				"line_ending": "Unix"
 			}
 		},
@@ -260,6 +260,14 @@
 			"settings":
 			{
 				"buffer_size": 1305,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "www/min_example.html",
+			"settings":
+			{
+				"buffer_size": 911,
 				"line_ending": "Unix"
 			}
 		},
@@ -275,7 +283,15 @@
 			"file": "lib/windowmanager/windowmanager.css",
 			"settings":
 			{
-				"buffer_size": 85,
+				"buffer_size": 60,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/prosjekter/story_terminal/story_terminal/www/StoryTerminal/pub/js/storyterminal.cmd.outlinemap.js",
+			"settings":
+			{
+				"buffer_size": 5697,
 				"line_ending": "Unix"
 			}
 		},
@@ -291,7 +307,7 @@
 			"file": "lib/terminal/terminal.js",
 			"settings":
 			{
-				"buffer_size": 14546,
+				"buffer_size": 14662,
 				"line_ending": "Unix"
 			}
 		},
@@ -299,7 +315,7 @@
 			"file": "lib/windowmanager/windowmanager.js",
 			"settings":
 			{
-				"buffer_size": 5921,
+				"buffer_size": 6707,
 				"line_ending": "Unix"
 			}
 		},
@@ -315,7 +331,7 @@
 			"file": "test/test.windowmanager.mocha.js",
 			"settings":
 			{
-				"buffer_size": 11484,
+				"buffer_size": 10324,
 				"line_ending": "Unix"
 			}
 		},
@@ -331,8 +347,30 @@
 			"file": "test/test.terminal.mocha.js",
 			"settings":
 			{
-				"buffer_size": 31824,
+				"buffer_size": 31813,
 				"line_ending": "Unix"
+			}
+		},
+		{
+			"contents": "# Terminal jQuery plugin\nTurns any div element into a customizable, bash-style terminal window with the option to open windows with user-provided content. Any custom-made command may be added through the jQuery interface.\n\n## Hello World!\nA simple example is shown on (espenandersen.no/terminal)\n\n```html\n<html>\n<head>\n	<title>terminal</title>	\n	<script type=\"text/javascript\" src=\"http://code.jquery.com/jquery-1.9.1.min.js\"></script>\n	<script type=\"text/javascript\" src=\"lib/terminal/terminal.js\"></script>\n	<link rel=\"stylesheet\" type=\"text/css\" href=\"lib/terminal/terminal.css\"/>\n	<style>\n		body {\n			font-family: \"Consolas\", \"Courier New\", monospace;\n			font-size: 14px;\n			color: #0f0;\n			background-color: #000;\n		}\n		.terminal {\n			height: 400px;\n			width: 500px;\n		}\n	</style>\n</head>\n<body>\n	<div id=\"terminal\"></div>\n	<script>\n		$( document ).ready( function() {\n			$( '#terminal' )\n				.terminal()\n				.terminal( 'register_command', {\n					name: 'hello',\n					main: function() {\n						$( '#terminal' )\n							.terminal( 'new_line' )\n							.terminal( 'write_line', 'hello, world!' );\n					}\n				} )\n				.terminal( 'write_line', 'say hello' )\n				.terminal( 'activate' );\n		} );\n	</script>\n</body>\n</html>\n```\n## License\nThis jQuery plugin is released under the (MIT license)[http://opensource.org/licenses/MIT]. Feel free to redistribute and/or modify it any way you like. I would be happy to know of any successful implementations out there.\n",
+			"file": "readme.markdown",
+			"file_size": 1397,
+			"file_write_time": 1364667325000000,
+			"settings":
+			{
+				"buffer_size": 1455,
+				"line_ending": "Unix",
+				"name": "# Terminal jQuery plugin"
+			}
+		},
+		{
+			"contents": "Package Control Messages\n========================\n\nWeb Inspector:\n-------------\n\n  Use Web Inspector command.\n  \n  More details http://sokolovstas.github.com/SublimeWebInspector/\n",
+			"settings":
+			{
+				"buffer_size": 179,
+				"line_ending": "Unix",
+				"name": "Package Control Messages",
+				"scratch": true
 			}
 		},
 		{
@@ -347,9 +385,13 @@
 	"build_system": "",
 	"command_palette":
 	{
-		"height": 267.0,
+		"height": 47.0,
 		"selected_items":
 		[
+			[
+				"install",
+				"Package Control: Install Package"
+			],
 			[
 				"Package Control: ",
 				"Package Control: Install Package"
@@ -372,8 +414,11 @@
 	},
 	"file_history":
 	[
+		"/Users/n21131/Library/Application Support/Sublime Text 2/Packages/Web Inspector/swi.sublime-settings",
+		"/prosjekter/terminal/license",
 		"/prosjekter/terminal/lib/terminal/window.css",
 		"/prosjekter/terminal/lib/terminal/window.js",
+		"/prosjekter/terminal/lib/windowmanager/windowmanager.js",
 		"/prosjekter/terminal/test/test.window.mocha.js",
 		"/prosjekter/terminal/test/testem.yml",
 		"/prosjekter/terminal/terminal.sublime-project",
@@ -647,7 +692,7 @@
 	"groups":
 	[
 		{
-			"selected": 5,
+			"selected": 0,
 			"sheets":
 			[
 				{
@@ -709,15 +754,15 @@
 					"file": "lib/terminal/terminal.cmd.about.js",
 					"settings":
 					{
-						"buffer_size": 1555,
+						"buffer_size": 534,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1401,
-								1401
+								245,
+								245
 							]
 						],
 						"settings":
@@ -743,8 +788,8 @@
 						"selection":
 						[
 							[
-								799,
-								895
+								1092,
+								1092
 							]
 						],
 						"settings":
@@ -754,13 +799,41 @@
 							"word_wrap": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 41.0,
+						"translation.y": 252.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 4,
+					"file": "www/min_example.html",
+					"settings":
+					{
+						"buffer_size": 911,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								911
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"translate_tabs_to_spaces": false,
+							"word_wrap": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 147.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 5,
 					"file": "www/4panes.html",
 					"settings":
 					{
@@ -787,19 +860,19 @@
 					"type": "text"
 				},
 				{
-					"buffer": 5,
+					"buffer": 6,
 					"file": "lib/windowmanager/windowmanager.css",
 					"settings":
 					{
-						"buffer_size": 85,
+						"buffer_size": 60,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								85,
-								85
+								0,
+								0
 							]
 						],
 						"settings":
@@ -820,7 +893,34 @@
 			"sheets":
 			[
 				{
-					"buffer": 6,
+					"buffer": 7,
+					"file": "/prosjekter/story_terminal/story_terminal/www/StoryTerminal/pub/js/storyterminal.cmd.outlinemap.js",
+					"settings":
+					{
+						"buffer_size": 5697,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								922,
+								922
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 613.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 8,
 					"file": "lib/jquery/jquery-1.9.1.js",
 					"settings":
 					{
@@ -831,8 +931,8 @@
 						"selection":
 						[
 							[
-								259300,
-								259300
+								218,
+								218
 							]
 						],
 						"settings":
@@ -841,7 +941,7 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 139065.0,
+						"translation.y": 207.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -849,23 +949,23 @@
 			]
 		},
 		{
-			"selected": 0,
+			"selected": 1,
 			"sheets":
 			[
 				{
-					"buffer": 7,
+					"buffer": 9,
 					"file": "lib/terminal/terminal.js",
 					"settings":
 					{
-						"buffer_size": 14546,
+						"buffer_size": 14662,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								963,
-								963
+								278,
+								278
 							]
 						],
 						"settings":
@@ -873,26 +973,26 @@
 							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
 							"translate_tabs_to_spaces": false
 						},
-						"translation.x": 1.0,
-						"translation.y": 532.0,
+						"translation.x": 0.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
-					"buffer": 8,
+					"buffer": 10,
 					"file": "lib/windowmanager/windowmanager.js",
 					"settings":
 					{
-						"buffer_size": 5921,
+						"buffer_size": 6707,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								0,
-								0
+								317,
+								317
 							]
 						],
 						"settings":
@@ -901,7 +1001,7 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 2666.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -909,11 +1009,11 @@
 			]
 		},
 		{
-			"selected": 3,
+			"selected": 5,
 			"sheets":
 			[
 				{
-					"buffer": 9,
+					"buffer": 11,
 					"file": "test/test.terminal.mocha.html",
 					"settings":
 					{
@@ -941,19 +1041,19 @@
 					"type": "text"
 				},
 				{
-					"buffer": 10,
+					"buffer": 12,
 					"file": "test/test.windowmanager.mocha.js",
 					"settings":
 					{
-						"buffer_size": 11484,
+						"buffer_size": 10324,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								11370,
-								11370
+								0,
+								0
 							]
 						],
 						"settings":
@@ -969,7 +1069,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 11,
+					"buffer": 13,
 					"file": "/prosjekter/spionbyen/spionbyen.sublime-project",
 					"settings":
 					{
@@ -995,19 +1095,19 @@
 					"type": "text"
 				},
 				{
-					"buffer": 12,
+					"buffer": 14,
 					"file": "test/test.terminal.mocha.js",
 					"settings":
 					{
-						"buffer_size": 31824,
+						"buffer_size": 31813,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								31200,
-								31805
+								0,
+								0
 							]
 						],
 						"settings":
@@ -1023,7 +1123,61 @@
 					"type": "text"
 				},
 				{
-					"buffer": 13,
+					"buffer": 15,
+					"file": "readme.markdown",
+					"settings":
+					{
+						"buffer_size": 1455,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								294,
+								294
+							]
+						],
+						"settings":
+						{
+							"auto_name": "# Terminal jQuery plugin",
+							"syntax": "Packages/Markdown/Markdown.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 16,
+					"settings":
+					{
+						"buffer_size": 179,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								128,
+								178
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Text/Plain text.tmLanguage",
+							"word_wrap": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 17,
 					"file": "test/test_batch_script.bat",
 					"settings":
 					{
