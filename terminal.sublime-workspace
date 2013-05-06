@@ -235,7 +235,7 @@
 			"file": "lib/terminal/terminal.css",
 			"settings":
 			{
-				"buffer_size": 1510,
+				"buffer_size": 1506,
 				"line_ending": "Unix"
 			}
 		},
@@ -291,7 +291,7 @@
 			"file": "lib/terminal/terminal.js",
 			"settings":
 			{
-				"buffer_size": 14546,
+				"buffer_size": 14590,
 				"line_ending": "Unix"
 			}
 		},
@@ -299,7 +299,7 @@
 			"file": "lib/windowmanager/windowmanager.js",
 			"settings":
 			{
-				"buffer_size": 9337,
+				"buffer_size": 5937,
 				"line_ending": "Unix"
 			}
 		},
@@ -315,7 +315,7 @@
 			"file": "test/test.windowmanager.mocha.js",
 			"settings":
 			{
-				"buffer_size": 11484,
+				"buffer_size": 10382,
 				"line_ending": "Unix"
 			}
 		},
@@ -331,7 +331,7 @@
 			"file": "test/test.terminal.mocha.js",
 			"settings":
 			{
-				"buffer_size": 31824,
+				"buffer_size": 31813,
 				"line_ending": "Unix"
 			}
 		},
@@ -655,7 +655,7 @@
 					"file": "lib/terminal/terminal.css",
 					"settings":
 					{
-						"buffer_size": 1510,
+						"buffer_size": 1506,
 						"regions":
 						{
 						},
@@ -857,15 +857,15 @@
 					"file": "lib/terminal/terminal.js",
 					"settings":
 					{
-						"buffer_size": 14546,
+						"buffer_size": 14590,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1407,
-								1407
+								0,
+								0
 							]
 						],
 						"settings":
@@ -884,15 +884,15 @@
 					"file": "lib/windowmanager/windowmanager.js",
 					"settings":
 					{
-						"buffer_size": 9337,
+						"buffer_size": 5937,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								6755,
-								6755
+								2229,
+								2229
 							]
 						],
 						"settings":
@@ -901,7 +901,7 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 2666.0,
+						"translation.y": 1348.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -945,15 +945,15 @@
 					"file": "test/test.windowmanager.mocha.js",
 					"settings":
 					{
-						"buffer_size": 11484,
+						"buffer_size": 10382,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								11370,
-								11370
+								0,
+								0
 							]
 						],
 						"settings":
@@ -963,7 +963,7 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 6864.0,
+						"translation.y": 6378.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -999,15 +999,15 @@
 					"file": "test/test.terminal.mocha.js",
 					"settings":
 					{
-						"buffer_size": 31824,
+						"buffer_size": 31813,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								31618,
-								31618
+								0,
+								0
 							]
 						],
 						"settings":
